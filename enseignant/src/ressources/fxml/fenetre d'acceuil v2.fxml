@@ -20,8 +20,6 @@
           <items>
             <MenuItem mnemonicParsing="false" text="Nouveau" />
             <MenuItem mnemonicParsing="false" text="Ouvrir" />
-            <MenuItem mnemonicParsing="false" text="Sauvegarder" />
-            <MenuItem mnemonicParsing="false" text="Sauvegardez sous ..." />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Quitter" />
           </items>
