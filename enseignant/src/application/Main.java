@@ -1,5 +1,6 @@
 package application;
 	
+import controller.AccueilController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,10 +11,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/fenetre d'acceuil v2.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/accueil.fxml"));
 			Scene scene = new Scene(loader.load());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Accueil");
 			primaryStage.show();
+			
+			AccueilController controller = loader.getController();
+			controller.setStage(primaryStage);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

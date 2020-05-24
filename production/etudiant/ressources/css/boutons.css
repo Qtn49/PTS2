@@ -1,0 +1,85 @@
+/*
+Dessiner un triangle pour le bouton play
+ */
+.play {
+
+    -fx-background-image: url('../images/play.png');
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 40%;
+
+}
+
+/*
+Dessiner deux barres verticales pour le bouton pause
+ */
+.pause {
+
+    -fx-background-image: url('../images/pause.png');
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+
+}
+
+/*
+Dessiner deux rectangles vers la droite
+ */
+.suivant {
+
+    -fx-background-image: url('../images/fastForward.png');
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 90%;
+
+}
+
+/*
+Dessiner deux rectangles vers la gauche
+ */
+.precedant {
+
+    -fx-background-image: url('../images/rewind.png');
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 60%;
+    
+}
+
+/*
+Mettre une image de haut-parleur
+ */
+.soundOn {
+
+    -fx-background-image: url('../images/soundOn.png');
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: -50%;
+    
+    /*-fx-graphic: url("../images/soundOn.png");*/
+    
+}
+
+.soundOff {
+
+    -fx-background-image: url('../images/soundOff.png');
+    -fx-background-size: 22px;
+    -fx-background-repeat: no-repeat;
+    
+}
+
+/*
+Mettre un carré entouré de flèche pour indiquer le mode plein-écran
+ */
+.plein-ecran {
+    
+    /*-fx-background-image: url("../images/pleinEcran.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;*/
+
+    -fx-background-image: url('../images/pleinEcran.png');
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 65%;
+
+}
