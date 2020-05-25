@@ -21,7 +21,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
    <children>
       <MenuBar>
       <menus>
@@ -30,7 +30,7 @@
             <MenuItem mnemonicParsing="false" text="Nouveau" />
             <MenuItem mnemonicParsing="false" text="Ouvrir" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quitter" />
+            <MenuItem fx:id="MIQ" mnemonicParsing="false" onAction="#quitter" text="Quitter" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
