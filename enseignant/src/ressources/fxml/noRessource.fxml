@@ -14,7 +14,7 @@
             <Label text="Aucune ressource sélectionnée" />
             <HBox alignment="CENTER">
                <children>
-                <Button mnemonicParsing="false" onAction="#quitter" onKeyPressed="#quitter" text="OK" />
+                <Button mnemonicParsing="false" onAction="#quitter" onMouseClicked="#quitter" onKeyPressed="#quitter" text="OK" />
                </children>
             </HBox>
          </children>

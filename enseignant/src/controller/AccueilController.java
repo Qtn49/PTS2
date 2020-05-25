@@ -21,49 +21,6 @@ public class AccueilController {
 		this.stage = stage;
 	}
 
-	public void ouvrir(ActionEvent event) {
-		
-		MenuItem item = (MenuItem) event.getSource();
-		PrincipalController controller = null;
-		FXMLLoader loader;
-		Scene scene = null;
-		boolean valide = true;
 
-		try {
-
-			loader = new FXMLLoader(getClass().getResource("../ressources/fxml/principal.fxml"));
-			scene = new Scene(loader.load());
-			controller = loader.getController();
-			controller.setStage(stage);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (item.getText().equalsIgnoreCase("ouvrir")) {
-
-
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Ouvrir un exercice");
-				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Exercices (*.exo)", "*.exo"));
-				File file = fileChooser.showOpenDialog(stage);
-				controller.setExo(file);
-				System.out.println(file);
-
-				if (file == null)
-					valide = false;
-				else
-					valide = true;
-		}
-
-		if (valide) {
-
-			stage.setScene(scene);
-			stage.setTitle("Création d'un nouvel exercice");
-
-		}
-
-	}
 	
 }

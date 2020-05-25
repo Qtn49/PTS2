@@ -1,6 +1,7 @@
 package application;
 	
 import controller.AccueilController;
+import controller.PrincipalController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,13 +12,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/accueil.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/accueil.fxml"));
 			Scene scene = new Scene(loader.load());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Accueil");
 			primaryStage.show();
 			
-			AccueilController controller = loader.getController();
+			PrincipalController controller = loader.getController();
 			controller.setStage(primaryStage);
 			
 		} catch(Exception e) {
