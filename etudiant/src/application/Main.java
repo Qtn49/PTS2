@@ -22,6 +22,7 @@ public class Main extends Application {
 			primaryStage.show();
 			PrincipalController p1 = loader.getController();
 			p1.setStage(primaryStage);
+			
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				
 				@Override

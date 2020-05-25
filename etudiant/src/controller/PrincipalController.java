@@ -21,6 +21,12 @@ public class PrincipalController {
 	@FXML
 	private Button BQ1;
 	
+	@FXML
+	private Button BS1;
+	
+	@FXML
+	private Button cancelButton;
+	
 	private Stage stage;
 	
 	@FXML
@@ -34,6 +40,24 @@ public class PrincipalController {
 			e.printStackTrace();
 		}
 		stage.show();
+	}
+	
+	@FXML
+	public void solution (Event event) {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/alerteSolution.fxml"));
+		try {
+			stage.setScene(new Scene(loader.load()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		stage.show();
+	}
+	
+	@FXML
+	public void cancelsolu (MouseEvent event) {
+		stage.close();
 	}
 	
 	@FXML
