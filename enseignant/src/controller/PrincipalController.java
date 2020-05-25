@@ -104,6 +104,8 @@ public class PrincipalController {
                 if (file.isFile() && file.getName().matches("^.*\\.(mp4|mp3|wav|mkv)$"))
                     setMedia(file);
 
+
+
             }
 
         }else {
@@ -171,6 +173,7 @@ public class PrincipalController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/quitter.fxml"));
 		try {
 			stage.setScene(new Scene(loader.load()));
+			stage.initModality(Modality.APPLICATION_MODAL);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,5 +186,10 @@ public class PrincipalController {
 		Platform.exit();
 	}
 
+    public void supprimer(ActionEvent event) {
+
+        
+
+    }
 }
 

@@ -14,7 +14,7 @@
             <MenuItem fx:id="nouveau" mnemonicParsing="false" onAction="#ouvrir" text="Nouveau" />
             <MenuItem mnemonicParsing="false" onAction="#ouvrir" text="Ouvrir" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quitter" />
+            <MenuItem mnemonicParsing="false" text="Quitter" onAction="#quitter" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
