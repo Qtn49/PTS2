@@ -95,7 +95,7 @@
                         <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
                         <AnchorPane>
                            <children>
-                              <Label alignment="CENTER" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                              <Label alignment="CENTER" opacity="0.0" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -103,7 +103,7 @@
                                     <Insets bottom="200.0" left="30.0" right="30.0" top="200.0" />
                                  </padding>
                               </Label>
-                              <MediaView fitHeight="400.0" fitWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <MediaView fx:id="ressource" fitHeight="400.0" fitWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" top="10.0" />
@@ -161,7 +161,7 @@
           <items>
             <MenuItem mnemonicParsing="false" text="Nouveau" />
             <MenuItem mnemonicParsing="false" text="Ouvrir" />
-                  <MenuItem mnemonicParsing="false" text="Importer une ressource..." />
+                  <MenuItem mnemonicParsing="false" onAction="#importer" text="Importer une ressource..." />
             <MenuItem disable="true" mnemonicParsing="false" text="Sauvegarder " />
             <MenuItem mnemonicParsing="false" text="Sauvegarder sous..." />
             <MenuItem mnemonicParsing="false" text="Quitter" />
