@@ -60,7 +60,7 @@
                                                 <Font name="DejaVu Sans Bold" size="37.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="TA1" onKeyReleased="#effacerMot" prefHeight="243.0" prefWidth="271.0" text="Jouer" />
+                                          <TextArea prefHeight="243.0" prefWidth="271.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="30.0">

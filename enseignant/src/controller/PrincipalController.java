@@ -21,6 +21,7 @@ public class PrincipalController {
 	@FXML
 	private Button BQ1;
 
+	
 	private Stage stage;
 
 	@FXML
@@ -50,3 +51,4 @@ public class PrincipalController {
 
 	}
 }
+

@@ -11,7 +11,7 @@
   <children>
       <AnchorPane fx:id="A1" prefHeight="374.0" prefWidth="640.0">
          <children>
-            <Text fx:id="text" layoutX="32.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voulez vous vraiment quitter ?" textAlignment="CENTER" wrappingWidth="575.9953002929688">
+            <Text fx:id="text" layoutX="32.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voulez vous vraiment quittter ?" textAlignment="CENTER" wrappingWidth="575.9953002929688">
                <font>
                   <Font size="47.0" />
                </font>
@@ -25,7 +25,7 @@
                   </Button>
                </left>
                <right>
-                  <Button fx:id="QB1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#part" text="Quitter" translateX="-30.0" BorderPane.alignment="CENTER">
+                  <Button fx:id="quit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Quitter" translateX="-30.0" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="15.0" />
                      </font>

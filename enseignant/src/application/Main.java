@@ -1,6 +1,11 @@
 package application;
 
+
 import controller.PrincipalController;
+
+
+import controller.AccueilController;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +18,13 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/fenetre d'acceuil v2.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/accueil.fxml"));
 			Scene scene = new Scene(loader.load());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Accueil");
 			primaryStage.show();
-			PrincipalController p1 = loader.getController();
+
+			AccueilController p1 = loader.getController();
 			p1.setStage(primaryStage);
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -28,6 +35,12 @@ public class Main extends Application {
 
 				}
 			});
+
+
+			AccueilController controller = loader.getController();
+			controller.setStage(primaryStage);
+
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

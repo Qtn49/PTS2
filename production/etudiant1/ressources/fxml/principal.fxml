@@ -21,7 +21,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar>
       <menus>
@@ -30,8 +30,7 @@
             <MenuItem mnemonicParsing="false" text="Nouveau" />
             <MenuItem mnemonicParsing="false" text="Ouvrir" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="MIQ" mnemonicParsing="false" onAction="#quitter" text="Quitter" />
-                  <MenuItem fx:id="MIQ1" mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+            <MenuItem mnemonicParsing="false" text="Quitter" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
@@ -105,7 +104,7 @@
                               <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" wrapText="true" />
                            </children>
                         </VBox>
-                        <Button fx:id="BS1" mnemonicParsing="false" onMouseClicked="#solution" text="Solution" translateX="30.0" translateY="150.0" />
+                        <Button mnemonicParsing="false" text="Solution" translateX="30.0" translateY="150.0" />
                      </children>
                      <padding>
                         <Insets bottom="40.0" left="20.0" right="50.0" top="20.0" />
