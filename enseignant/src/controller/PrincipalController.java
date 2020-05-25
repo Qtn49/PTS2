@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -31,6 +33,12 @@ public class PrincipalController {
     private Label labelRessource;
     @FXML
     private MediaView ressource;
+
+    @FXML
+    private MenuItem MIQ;
+
+    @FXML
+    private Button BQ1;
 
     public void ouvrir(ActionEvent event) {
 
@@ -157,4 +165,23 @@ public class PrincipalController {
 
     }
 
+	@FXML
+	public void quitter (Event event) {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/quitter.fxml"));
+		try {
+			stage.setScene(new Scene(loader.load()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		stage.show();
+	}
+
+	@FXML
+	public void part (MouseEvent event) {
+		Platform.exit();
+	}
+
 }
+
