@@ -121,7 +121,7 @@ public class PrincipalController {
 			defilerLecture.setValue(player.getCurrentTime().toSeconds() * player.getTotalDuration().toSeconds() / 100);
 		}
 		
-		updateCurseur();
+//		updateCurseur();
 		
 	}
 	
@@ -139,6 +139,22 @@ public class PrincipalController {
 		MediaPlayer player = ressource.getMediaPlayer();
 		
 		player.setVolume(player.getVolume() * -1 + 1);
+	}
+	
+	public void avancer() {
+		
+		MediaPlayer player = ressource.getMediaPlayer();
+		double curseur = player.getCurrentTime().toSeconds() + 5;
+		
+		player.seek(Duration.seconds(curseur));
+	}
+	
+	public void reculer() {
+		
+		MediaPlayer player = ressource.getMediaPlayer();
+		double curseur = player.getCurrentTime().toSeconds() - 5;
+		
+		player.seek(Duration.seconds(curseur));
 	}
 	
 }

@@ -135,8 +135,8 @@
                                  <children>
                                     <ToggleButton mnemonicParsing="false" styleClass="play" stylesheets="@../css/boutons.css" />
                                     <ToggleButton mnemonicParsing="false" styleClass="pause" stylesheets="@../css/boutons.css" />
-                                    <Button mnemonicParsing="false" styleClass="precedant" stylesheets="@../css/boutons.css" />
-                                    <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" styleClass="suivant" stylesheets="@../css/boutons.css" />
+                                    <Button mnemonicParsing="false" styleClass="precedant" onAction="#reculer" stylesheets="@../css/boutons.css" />
+                                    <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" styleClass="suivant" onAction="#avancer" stylesheets="@../css/boutons.css" />
                                     <ScrollBar fx:id="defilerLecture" prefHeight="17.0" prefWidth="433.0" />
                                     <ToggleButton mnemonicParsing="false" onAction="#mute" styleClass="soundOff" stylesheets="@../css/boutons.css" />
                                     <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/boutons.css" />
