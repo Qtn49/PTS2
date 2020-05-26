@@ -1,1 +1,7 @@
-/.metadata/
+.metadata
+*/bin
+*.swp
+.idea
+.classpath
+production
+test.exo

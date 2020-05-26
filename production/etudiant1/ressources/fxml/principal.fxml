@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar>
+      <menus>
+        <Menu mnemonicParsing="false" text="Fichier">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Nouveau" />
+            <MenuItem mnemonicParsing="false" text="Ouvrir" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quitter" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Aide">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Raccourcis" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Tutoriel" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="A propos">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="?" />
+               </items>
+        </Menu>
+      </menus>
+      </MenuBar>
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <Label text="Temps restant total :                 " />
+            <Label layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" text="Temps restant section :             " />
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox>
+         <children>
+            <VBox>
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="section 1">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="100.0" layoutY="46.0" prefHeight="367.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </VBox>
+                  <HBox>
+                     <children>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Proposition">
+                                 <font>
+                                    <Font name="System Bold" size="36.0" />
+                                 </font>
+                              </Label>
+                              <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" text="Valider" translateX="-20.0" translateY="150.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <VBox spacing="10.0">
+                           <children>
+                              <Label text="Aide">
+                                 <font>
+                                    <Font name="System Bold" size="36.0" />
+                                 </font>
+                              </Label>
+                              <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" wrapText="true" />
+                           </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" text="Solution" translateX="30.0" translateY="150.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="40.0" left="20.0" right="50.0" top="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="72.0" text="Consigne :" />
+                        <TextArea prefHeight="162.0" prefWidth="356.0" />
+                        <SplitPane dividerPositions="0.8542713567839196" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL">
+                          <items>
+                            <AnchorPane fx:id="mediaContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="654.0">
+                                 <children>
+                                    <MediaView layoutX="73.0" layoutY="50.0" />
+                                    <ImageView fitHeight="195.0" fitWidth="360.0" layoutX="188.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/videoVide.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                 <children>
+                                    <ToggleButton mnemonicParsing="false" styleClass="play" stylesheets="@../css/boutons.css" />
+                                    <ToggleButton mnemonicParsing="false" styleClass="pause" stylesheets="@../css/boutons.css" />
+                                    <Button mnemonicParsing="false" styleClass="precedant" stylesheets="@../css/boutons.css" />
+                                    <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" styleClass="suivant" stylesheets="@../css/boutons.css" />
+                                    <ScrollBar prefHeight="17.0" prefWidth="433.0" />
+                                    <ToggleButton mnemonicParsing="false" styleClass="soundOff" stylesheets="@../css/boutons.css" />
+                                    <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/boutons.css" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </HBox>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

@@ -1,0 +1,6 @@
+ .texte {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+     -fx-alignment: center;
+     -fx-text-alignment: center;
+}
