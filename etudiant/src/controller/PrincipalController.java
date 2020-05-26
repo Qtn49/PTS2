@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -16,9 +15,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -93,7 +92,7 @@ public class PrincipalController {
 		
 		File file = new File("src/ressources/videos/PostMaloneBetterNow.mp4");
 		
-		defilerLecture.valueProperty().addListener((observable, oldValue, newValue) -> defilerLecture(observable, oldValue, newValue));
+		defilerLecture.valueProperty().addListener((observable, oldValue, newValue) -> deplacerCurseur(observable, oldValue, newValue));
 		
 		MediaPlayer media = new MediaPlayer(new Media(file.toURI().toString()));
 		if (file.getName().matches(".*\\.mp4$"))
@@ -105,6 +104,8 @@ public class PrincipalController {
 			public void run() {
 				// TODO Auto-generated method stub
 				media.play();
+				updateCurseur();
+				
 			}
 		});
 		
@@ -112,14 +113,32 @@ public class PrincipalController {
 		
 	}
 	
-	public void defilerLecture (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+	private void updateCurseur() {
+
+		MediaPlayer player = ressource.getMediaPlayer();
+		
+		if (player.getStatus() == Status.PLAYING) {
+			defilerLecture.setValue(player.getCurrentTime().toSeconds() * player.getTotalDuration().toSeconds() / 100);
+		}
+		
+		updateCurseur();
+		
+	}
+	
+	public void deplacerCurseur (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
         
-		Duration duration = ressource.getMediaPlayer().getCurrentTime();
 		double durationTotal = ressource.getMediaPlayer().getTotalDuration().toSeconds();
 		double curseur = defilerLecture.getValue() * durationTotal / 100;
 		
 		ressource.getMediaPlayer().seek(Duration.seconds(curseur));
 		
     }
+	
+	public void mute() {
+		
+		MediaPlayer player = ressource.getMediaPlayer();
+		
+		player.setVolume(player.getVolume() * -1 + 1);
+	}
 	
 }
