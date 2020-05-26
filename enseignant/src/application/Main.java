@@ -4,7 +4,7 @@ package application;
 import controller.PrincipalController;
 
 
-import controller.AccueilController;
+
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -24,7 +24,7 @@ public class Main extends Application {
 			primaryStage.setTitle("Accueil");
 			primaryStage.show();
 
-			AccueilController p1 = loader.getController();
+			PrincipalController p1 = loader.getController();
 			p1.setStage(primaryStage);
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -37,7 +37,7 @@ public class Main extends Application {
 			});
 
 
-			AccueilController controller = loader.getController();
+			PrincipalController controller = loader.getController();
 			controller.setStage(primaryStage);
 
 

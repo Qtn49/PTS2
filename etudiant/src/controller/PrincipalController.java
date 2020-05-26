@@ -27,6 +27,9 @@ public class PrincipalController {
 	@FXML
 	private Button cancelButton;
 	
+	@FXML
+	private Button backButton;
+	
 	private Stage stage;
 	
 	@FXML
@@ -56,8 +59,8 @@ public class PrincipalController {
 	}
 	
 	@FXML
-	public void cancelsolu (MouseEvent event) {
-		stage.close();
+	public void goback(ActionEvent event) {
+		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
 	
 	@FXML

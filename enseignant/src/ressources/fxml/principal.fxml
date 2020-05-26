@@ -60,7 +60,7 @@
                                                 <Font name="DejaVu Sans Bold" size="37.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="TA1" onKeyReleased="#effacerMot" prefHeight="243.0" prefWidth="271.0" text="Jouer" />
+                                          <TextArea fx:id="TA1" prefHeight="243.0" prefWidth="271.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="30.0">
@@ -164,7 +164,7 @@
                   <MenuItem mnemonicParsing="false" text="Importer une ressource..." />
             <MenuItem disable="true" mnemonicParsing="false" text="Sauvegarder " />
             <MenuItem mnemonicParsing="false" text="Sauvegarder sous..." />
-            <MenuItem mnemonicParsing="false" text="Quitter" />
+            <MenuItem fx:id="MQ2" mnemonicParsing="false" onAction="#quitter" text="Quitter" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
