@@ -11,6 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -28,6 +30,17 @@ public class PrincipalController {
 	
 	@FXML
 	private Button backButton2;
+	
+	@FXML
+	private Button BA1;
+	
+	@FXML
+	private TextField TF1;
+	
+	@FXML
+	private TextArea TA1;
+	
+	private String aidecomp ="";
 
 	
 	private Stage stage;
@@ -76,6 +89,15 @@ public class PrincipalController {
 			e.printStackTrace();
 		}
 		stage.show();
+	}
+	
+	@FXML
+	public void Display (ActionEvent event) {
+		String aide = TF1.getText();
+		aidecomp = aidecomp + "\n" + TF1.getText();
+		TA1.setText(aidecomp);
+		
+		
 	}
 
 	@FXML

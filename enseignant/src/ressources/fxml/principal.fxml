@@ -60,13 +60,13 @@
                                                 <Font name="DejaVu Sans Bold" size="37.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="TA1" prefHeight="243.0" prefWidth="271.0" />
+                                          <TextArea fx:id="TA1" editable="false" prefHeight="243.0" prefWidth="271.0" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="30.0">
                                        <children>
-                                          <TextField />
-                                          <Button mnemonicParsing="false" text="Ajouter">
+                                          <TextField fx:id="TF1" />
+                                          <Button fx:id="BA1" mnemonicParsing="false" onAction="#Display" text="Ajouter">
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
