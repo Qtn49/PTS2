@@ -1,6 +1,8 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -8,11 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,15 +32,19 @@ public class PrincipalController {
     private File exo;
     private Stage stage;
     @FXML
-    private Label labelRessource;
-    @FXML
     private MediaView ressource;
+
+    @FXML
+    private Button supprimer;
 
     @FXML
     private MenuItem MIQ;
 
     @FXML
     private Button BQ1;
+
+    @FXML
+    private Tab ajoute;
 
     public void ouvrir(ActionEvent event) {
 
@@ -67,6 +73,7 @@ public class PrincipalController {
             fileChooser.setTitle("Ouvrir un exercice");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Exercices (*.exo)", "*.exo"));
             File file = fileChooser.showOpenDialog(stage);
+            assert controller != null;
             controller.setExo(file);
             System.out.println(file);
 
@@ -104,9 +111,9 @@ public class PrincipalController {
                 if (file.isFile() && file.getName().matches("^.*\\.(mp4|mp3|wav|mkv)$"))
                     setMedia(file);
 
-
-
             }
+
+
 
         }else {
 
@@ -141,10 +148,6 @@ public class PrincipalController {
 
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -164,11 +167,12 @@ public class PrincipalController {
                 System.out.println("media error"+player.getError().toString()));
         ressource.setMediaPlayer(player);
 
+        supprimer.setDisable(false);
 
     }
 
 	@FXML
-	public void quitter (Event event) {
+	public void quitter() {
 		Stage stage = new Stage();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/quitter.fxml"));
 		try {
@@ -182,14 +186,48 @@ public class PrincipalController {
 	}
 
 	@FXML
-	public void part (MouseEvent event) {
+	public void part() {
 		Platform.exit();
 	}
 
-    public void supprimer(ActionEvent event) {
+    public void supprimer() {
 
-        
+        ressource.setMediaPlayer(null);
+        supprimer.setDisable(true);
 
     }
+
+    public void ajouteSection (Event event) throws IOException {
+
+        int nbTab = ajoute.getTabPane().getTabs().size();
+
+        if (ajoute.isSelected()) {
+            Tab tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
+            tab.setText("section " + nbTab);
+            tab.setOnClosed(this::fermer);
+            ajoute.getTabPane().getTabs().add(nbTab - 1, tab);
+            ajoute.getTabPane().getSelectionModel().select(tab);
+        }
+
+
+    }
+
+    public void fermer (Event event) {
+
+        TabPane pane = ajoute.getTabPane();
+
+        for (Tab tab : pane.getTabs()) {
+
+            if (tab.getText().equals("+"))
+                continue;
+
+            int pos = pane.getTabs().indexOf(tab);
+
+            tab.setText("section " + (pos + 1));
+
+        }
+
+    }
+
 }
 
