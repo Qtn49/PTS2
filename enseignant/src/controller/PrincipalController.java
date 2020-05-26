@@ -1,20 +1,16 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -44,6 +40,12 @@ public class PrincipalController {
 
     @FXML
     private Tab ajoute;
+
+    @FXML
+    private ListView<String> aideMots;
+
+    @FXML
+    private TextField motEntre;
 
     public void ouvrir(ActionEvent event) {
 
@@ -224,6 +226,25 @@ public class PrincipalController {
             tab.setText("section " + (pos + 1));
 
         }
+
+    }
+
+    public void ajouterMot (Event event) {
+
+        if (event.getEventType() == KeyEvent.KEY_RELEASED) {
+            if (((KeyEvent) event).getCode() != KeyCode.ENTER || motEntre.getText().equals(""))
+                return;
+        }
+
+        aideMots.getItems().add(motEntre.getText());
+        motEntre.setText("");
+
+    }
+
+    public void retirerMot (KeyEvent event) {
+
+        if (event.getCode() == KeyCode.DELETE)
+            aideMots.getItems().remove(aideMots.getSelectionModel().getSelectedItem());
 
     }
 
