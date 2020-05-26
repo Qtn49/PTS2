@@ -5,14 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,9 +27,10 @@ public class PrincipalController {
     private File exo;
     private Stage stage;
     @FXML
-    private Label labelRessource;
-    @FXML
     private MediaView ressource;
+
+    @FXML
+    private Button supprimer;
 
     @FXML
     private MenuItem MIQ;
@@ -67,6 +65,7 @@ public class PrincipalController {
             fileChooser.setTitle("Ouvrir un exercice");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Exercices (*.exo)", "*.exo"));
             File file = fileChooser.showOpenDialog(stage);
+            assert controller != null;
             controller.setExo(file);
             System.out.println(file);
 
@@ -104,8 +103,6 @@ public class PrincipalController {
                 if (file.isFile() && file.getName().matches("^.*\\.(mp4|mp3|wav|mkv)$"))
                     setMedia(file);
 
-
-
             }
 
         }else {
@@ -141,10 +138,6 @@ public class PrincipalController {
 
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -159,16 +152,17 @@ public class PrincipalController {
 
     public void setMedia (File file) {
         MediaPlayer player = new MediaPlayer(new Media(file.toURI().toString()));
-        player.setAutoPlay(true);
+//        player.setAutoPlay(true);
         player.setOnError(()->
                 System.out.println("media error"+player.getError().toString()));
         ressource.setMediaPlayer(player);
 
+        supprimer.setDisable(false);
 
     }
 
 	@FXML
-	public void quitter (Event event) {
+	public void quitter() {
 		Stage stage = new Stage();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/quitter.fxml"));
 		try {
@@ -182,13 +176,15 @@ public class PrincipalController {
 	}
 
 	@FXML
-	public void part (MouseEvent event) {
+	public void part() {
 		Platform.exit();
 	}
 
-    public void supprimer(ActionEvent event) {
+    public void supprimer() {
 
-        
+    	ressource.getMediaPlayer().stop();
+        ressource.setMediaPlayer(null);
+        supprimer.setDisable(true);
 
     }
 }

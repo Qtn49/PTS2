@@ -60,7 +60,7 @@
                                                 <Font name="DejaVu Sans Bold" size="37.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="TA1" prefHeight="243.0" prefWidth="271.0" text="Jouer" />
+                                          <TextArea fx:id="TA1" editable="false" prefHeight="243.0" prefWidth="271.0" text="Jouer" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="30.0">
@@ -104,7 +104,7 @@
                                  </padding>
                               </Label>
                               <MediaView fx:id="ressource" fitHeight="400.0" fitWidth="600.0" onDragDropped="#importer" onDragOver="#dragOver" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <Button disable="true" layoutX="264.0" layoutY="384.0" mnemonicParsing="false" text="Supprimer" />
+                              <Button fx:id="supprimer" disable="true" layoutX="264.0" layoutY="384.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" top="10.0" />
