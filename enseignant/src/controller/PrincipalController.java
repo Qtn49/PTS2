@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -113,8 +112,6 @@ public class PrincipalController {
 
             }
 
-
-
         }else {
 
 
@@ -162,7 +159,7 @@ public class PrincipalController {
 
     public void setMedia (File file) {
         MediaPlayer player = new MediaPlayer(new Media(file.toURI().toString()));
-        player.setAutoPlay(true);
+//        player.setAutoPlay(true);
         player.setOnError(()->
                 System.out.println("media error"+player.getError().toString()));
         ressource.setMediaPlayer(player);
@@ -192,6 +189,7 @@ public class PrincipalController {
 
     public void supprimer() {
 
+    	ressource.getMediaPlayer().stop();
         ressource.setMediaPlayer(null);
         supprimer.setDisable(true);
 
