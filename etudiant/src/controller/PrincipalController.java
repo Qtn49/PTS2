@@ -84,7 +84,7 @@ public class PrincipalController {
 		return stage;
 	}
 
-	public void setStage(Stage primaryStage) {
+	public void setStage(Stage primaryStage) { 
 		stage = primaryStage;
 		
 	}
