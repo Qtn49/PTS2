@@ -40,6 +40,11 @@ public class Main extends Application {
 			AccueilController controller = loader.getController();
 			controller.setStage(primaryStage);
 
+			Spinner aSpinner = (Spinner) event.getSource();
+			for (Node aNode ; aSpinner.getParent().getChildrenUnmodifiable()) {
+				
+			}
+			
 
 		} catch(Exception e) {
 			e.printStackTrace();
