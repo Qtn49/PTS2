@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
    <center>
@@ -39,12 +40,15 @@
                           <tabs>
                             <Tab text="section 1">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="553.0">
                                        <children>
-                                          <TextArea layoutX="-37.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="-37.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="6.0">
+                                          <TextArea layoutX="-2.0" layoutY="29.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Saisissez ici le texte de la vidéo fractionné en section ( + rajoute une section )." wrapText="true" AnchorPane.bottomAnchor="-29.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="29.0">
                                              <opaqueInsets>
                                                 <Insets />
-                                             </opaqueInsets></TextArea>
+                                             </opaqueInsets>
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font></TextArea>
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -63,7 +67,7 @@
                                                 <Font name="DejaVu Sans Bold" size="37.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="TA1" onKeyReleased="#effacerMot" prefHeight="243.0" prefWidth="271.0" wrapText="true" />
+                                          <TextArea fx:id="TA1" onKeyReleased="#effacerMot" prefHeight="243.0" prefWidth="271.0" text="Ici s'affiche l'aide. Pour la remplir saisissez un mot dans le champ à droite et cliquez sur entrée." wrapText="true" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="30.0">
@@ -95,7 +99,7 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" wrapText="true" />
+                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Saisissez ici la consigne" wrapText="true" />
                         <AnchorPane>
                            <children>
                               <Label alignment="CENTER" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -149,6 +153,7 @@
                         <Label text="Total : " />
                      </children>
                   </VBox>
+                  <Text layoutX="576.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'encadré &quot;Section &quot; vous permet de définir le temps alloué à chaque section . Le total se calcule automatiquement" />
                </children>
           </AnchorPane>
          </children>
@@ -172,7 +177,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#tutoriel" text="Manuel d'utilisateur" />
+            <MenuItem mnemonicParsing="false" text="Manuel d'utilisateur" />
           </items>
         </Menu>
       </menus>

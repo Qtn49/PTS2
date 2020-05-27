@@ -242,6 +242,27 @@ public class PrincipalController {
 	public void goback(ActionEvent event) {
 		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
+	
+	@FXML
+	public void afficherTemps() {
+		Spinner aSpinner = (Spinner) event.getSource();
+		for(Node aNode : aSpinner.getParent().getChildrenUnmodifiable()) {
+			temps+=aSpinner.getValue();
+		}
+	}
+	
+	@FXML
+	public void tutoriel() {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/tutoriel.fxml"));
+		try {
+			stage.setScene(new Scene(loader.load()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		stage.show();
+	}
 
     public void supprimer() {
 
