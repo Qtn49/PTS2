@@ -13,7 +13,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/principal.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/principal.fxml"));
 			Scene scene = new Scene(loader.load());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
@@ -23,15 +23,10 @@ public class Main extends Application {
 			controller.setStage(primaryStage);
 			
 			controller.init();
-			
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				
-				@Override
-				public void handle(WindowEvent event) {
-					event.consume();
-					controller.quitter(event);
-					
-				}
+
+			primaryStage.setOnCloseRequest(event -> {
+				event.consume();
+				controller.quitter(event);
 			});
 		} catch(Exception e) {
 			e.printStackTrace();

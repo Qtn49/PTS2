@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -18,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -118,6 +119,16 @@ public class PrincipalController {
 		if (file.getName().matches(".*\\.mp4$"))
 			iconRessource.visibleProperty().set(false);
 		
+		media.currentTimeProperty().addListener(new InvalidationListener() {
+			
+			@Override
+			public void invalidated(Observable observable) {
+				// TODO Auto-generated method stub
+				updateCurseur();
+				
+			}
+		});
+		
 		media.setOnReady(new Runnable() {
 			
 			@Override
@@ -134,20 +145,17 @@ public class PrincipalController {
 	}
 	
 	private void pause (ActionEvent event) {
-		ressource.getMediaPlayer().pause();
-		
-		
+		MediaPlayer player = ressource.getMediaPlayer();
+		player.pause();
 	}
 	
 	private void updateCurseur() {
 
 		MediaPlayer player = ressource.getMediaPlayer();
 		
-		if (player.getStatus() == Status.PLAYING) {
-			defilerLecture.setValue(player.getCurrentTime().toSeconds() * player.getTotalDuration().toSeconds() / 100);
-		}
+		double curseur = player.getCurrentTime().toSeconds() * 100 / player.getTotalDuration().toSeconds();
 		
-//		updateCurseur();
+		defilerLecture.setValue(curseur);
 		
 	}
 	

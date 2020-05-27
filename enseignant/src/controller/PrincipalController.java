@@ -1,12 +1,16 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 
@@ -17,6 +21,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -67,6 +75,15 @@ public class PrincipalController {
     private MenuItem MIQ;
 
     
+
+    @FXML
+    private Tab ajoute;
+
+    @FXML
+    private ListView<String> aideMots;
+
+    @FXML
+    private TextField motEntre;
 
     public void ouvrir(ActionEvent event) {
 
@@ -250,5 +267,57 @@ public class PrincipalController {
         supprimer.setDisable(true);
 
     }
+
+    public void ajouteSection (Event event) throws IOException {
+
+        int nbTab = ajoute.getTabPane().getTabs().size();
+
+        if (ajoute.isSelected()) {
+            Tab tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
+            tab.setText("section " + nbTab);
+            tab.setOnClosed(this::fermer);
+            ajoute.getTabPane().getTabs().add(nbTab - 1, tab);
+            ajoute.getTabPane().getSelectionModel().select(tab);
+        }
+
+
+    }
+
+    public void fermer (Event event) {
+
+        TabPane pane = ajoute.getTabPane();
+
+        for (Tab tab : pane.getTabs()) {
+
+            if (tab.getText().equals("+"))
+                continue;
+
+            int pos = pane.getTabs().indexOf(tab);
+
+            tab.setText("section " + (pos + 1));
+
+        }
+
+    }
+
+    public void ajouterMot (Event event) {
+
+        if (event.getEventType() == KeyEvent.KEY_RELEASED) {
+            if (((KeyEvent) event).getCode() != KeyCode.ENTER || motEntre.getText().equals(""))
+                return;
+        }
+
+        aideMots.getItems().add(motEntre.getText());
+        motEntre.setText("");
+
+    }
+
+    public void retirerMot (KeyEvent event) {
+
+        if (event.getCode() == KeyCode.DELETE)
+            aideMots.getItems().remove(aideMots.getSelectionModel().getSelectedItem());
+
+    }
+
 }
 
