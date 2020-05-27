@@ -44,7 +44,7 @@
                                        <children>
                                           <TextArea layoutX="100.0" layoutY="46.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
-                                </AnchorPane>
+                                    </AnchorPane>
                               </content>
                             </Tab>
                             <Tab fx:id="ajoute" closable="false" onSelectionChanged="#ajouteSection" text="+" />
@@ -67,7 +67,11 @@
                                     <VBox alignment="CENTER" spacing="30.0">
                                        <children>
                                           <TextField fx:id="motEntre" onKeyReleased="#ajouterMot" />
-                                          <Button mnemonicParsing="false" onAction="#ajouterMot" text="Ajouter" />
+                                          <Button mnemonicParsing="false" onAction="#ajouterMot" text="Ajouter">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Button>
                                        </children>
                                     </VBox>
                                  </children>
@@ -89,12 +93,12 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" wrapText="true" />
+                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
                         <AnchorPane>
                            <children>
-                              <Label alignment="CENTER" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                              <Label fx:id="labelRessource" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="538.0" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                  <font>
-                                    <Font size="30.0" />
+                                    <Font size="20.0" />
                                  </font>
                                  <padding>
                                     <Insets bottom="200.0" left="30.0" right="30.0" top="200.0" />
