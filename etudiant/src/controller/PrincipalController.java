@@ -145,9 +145,8 @@ public class PrincipalController {
 	}
 	
 	private void pause (ActionEvent event) {
-		ressource.getMediaPlayer().pause();
-		
-		
+		MediaPlayer player = ressource.getMediaPlayer();
+		player.pause();
 	}
 	
 	private void updateCurseur() {
