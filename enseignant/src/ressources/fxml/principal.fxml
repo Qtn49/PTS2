@@ -41,7 +41,10 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="100.0" layoutY="46.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea layoutX="-37.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="-37.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="6.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets></TextArea>
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -60,7 +63,7 @@
                                                 <Font name="DejaVu Sans Bold" size="37.0" />
                                              </font>
                                           </Label>
-                                          <TextArea fx:id="TA1" onKeyReleased="#effacerMot" prefHeight="243.0" prefWidth="271.0" text="Jouer" />
+                                          <TextArea fx:id="TA1" onKeyReleased="#effacerMot" prefHeight="243.0" prefWidth="271.0" wrapText="true" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="30.0">
@@ -92,7 +95,7 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
+                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" wrapText="true" />
                         <AnchorPane>
                            <children>
                               <Label alignment="CENTER" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
@@ -140,7 +143,7 @@
                         <HBox spacing="5.0">
                            <children>
                               <Label text="Section 1 :" />
-                              <Spinner />
+                              <Spinner onInputMethodTextChanged="#afficherTemps" />
                            </children>
                         </HBox>
                         <Label text="Total : " />
@@ -169,7 +172,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
           <items>
-            <MenuItem mnemonicParsing="false" text="Manuel d'utilisateur" />
+            <MenuItem mnemonicParsing="false" onAction="#tutoriel" text="Manuel d'utilisateur" />
           </items>
         </Menu>
       </menus>

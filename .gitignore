@@ -3,5 +3,11 @@
 *.swp
 .idea
 .classpath
+<<<<<<< HEAD
+test.exo
+production
+artifacts
+=======
 production
 test.exo
+>>>>>>> 62164d569bf0b69a36d1c24e2d1cacd9775252bd
