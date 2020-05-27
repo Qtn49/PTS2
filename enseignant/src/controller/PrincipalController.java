@@ -214,7 +214,7 @@ public class PrincipalController {
 	@FXML
 	public void supprimer (Event event) {
 		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/alerteSuppressionExo.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/alerteSuppressionRessource.fxml"));
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		try {
@@ -259,7 +259,7 @@ public class PrincipalController {
 		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
 
-    public void supprimer() {
+    public void supprimerRessource () {
 
     	ressource.getMediaPlayer().stop();
         ressource.setMediaPlayer(null);
