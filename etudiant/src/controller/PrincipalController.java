@@ -191,4 +191,17 @@ public class PrincipalController {
 		player.seek(Duration.seconds(curseur));
 	}
 	
+	@FXML
+	public void tutoriel() {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/tutoriel.fxml"));
+		try {
+			stage.setScene(new Scene(loader.load()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		stage.show();
+	}
+	
 }

@@ -21,6 +21,9 @@
 <?import javafx.scene.text.Font?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2ce8663cb934f890ebaa6d6d36fb0272048a834b
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
    <center>
       <VBox>
@@ -37,6 +40,7 @@
                               <Insets bottom="5.0" right="10.0" top="5.0" />
                            </padding>
                         </Label>
+<<<<<<< HEAD
                         <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
                           <tabs>
                             <Tab onClosed="#fermer" text="section 1">
@@ -44,11 +48,27 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
                                           <TextArea layoutX="100.0" layoutY="46.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+=======
+                        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="section 1">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="-37.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="-37.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="6.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets></TextArea>
+>>>>>>> 2ce8663cb934f890ebaa6d6d36fb0272048a834b
                                        </children>
                                     </AnchorPane>
                               </content>
                             </Tab>
+<<<<<<< HEAD
                             <Tab fx:id="ajoute" closable="false" onSelectionChanged="#ajouteSection" text="+" />
+=======
+                            <Tab text="+" />
+>>>>>>> 2ce8663cb934f890ebaa6d6d36fb0272048a834b
                           </tabs>
                         </TabPane>
                         <VBox>
@@ -62,13 +82,22 @@
                                                 <Font name="DejaVu Sans Bold" size="37.0" />
                                              </font>
                                           </Label>
+<<<<<<< HEAD
                                           <ListView fx:id="aideMots" onKeyReleased="#retirerMot" prefHeight="200.0" prefWidth="200.0" />
+=======
+                                          <TextArea fx:id="TA1" onKeyReleased="#effacerMot" prefHeight="243.0" prefWidth="271.0" wrapText="true" />
+>>>>>>> 2ce8663cb934f890ebaa6d6d36fb0272048a834b
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" spacing="30.0">
                                        <children>
+<<<<<<< HEAD
                                           <TextField fx:id="motEntre" onKeyReleased="#ajouterMot" />
                                           <Button mnemonicParsing="false" onAction="#ajouterMot" text="Ajouter">
+=======
+                                          <TextField />
+                                          <Button mnemonicParsing="false" text="Ajouter">
+>>>>>>> 2ce8663cb934f890ebaa6d6d36fb0272048a834b
                                              <font>
                                                 <Font size="20.0" />
                                              </font>
@@ -94,12 +123,21 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
+<<<<<<< HEAD
                         <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
                         <AnchorPane>
                            <children>
                               <Label fx:id="labelRessource" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="538.0" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                  <font>
                                     <Font size="20.0" />
+=======
+                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" wrapText="true" />
+                        <AnchorPane>
+                           <children>
+                              <Label alignment="CENTER" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="30.0" />
+>>>>>>> 2ce8663cb934f890ebaa6d6d36fb0272048a834b
                                  </font>
                                  <padding>
                                     <Insets bottom="200.0" left="30.0" right="30.0" top="200.0" />
@@ -107,6 +145,8 @@
                               </Label>
                               <MediaView fx:id="ressource" fitHeight="400.0" fitWidth="600.0" onDragDropped="#importer" onDragOver="#dragOver" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                               <Button fx:id="supprimer" disable="true" layoutX="264.0" layoutY="384.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                              <MediaView fitHeight="400.0" fitWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+>>>>>>> 2ce8663cb934f890ebaa6d6d36fb0272048a834b
                            </children>
                            <padding>
                               <Insets bottom="10.0" top="10.0" />
@@ -139,11 +179,13 @@
                   <CheckBox layoutX="383.0" layoutY="39.0" mnemonicParsing="false" text="Limite de temps" />
                   <CheckBox layoutX="21.0" layoutY="39.0" mnemonicParsing="false" text="Mode apprentissage" />
                   <VBox fx:id="zoneTemps" layoutX="690.9619140625" layoutY="54.0" spacing="10.0">
+                  <VBox layoutX="690.9619140625" layoutY="54.0" spacing="10.0">
                      <children>
                         <HBox spacing="5.0">
                            <children>
                               <Label text="Section 1 :" />
                               <Spinner />
+                              <Spinner onInputMethodTextChanged="#afficherTemps" />
                            </children>
                         </HBox>
                         <Label text="Total : " />
@@ -172,7 +214,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">
           <items>
-            <MenuItem mnemonicParsing="false" text="Manuel d'utilisateur" />
+            <MenuItem mnemonicParsing="false" onAction="#tutoriel" text="Manuel d'utilisateur" />
           </items>
         </Menu>
       </menus>

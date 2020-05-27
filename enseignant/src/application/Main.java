@@ -1,4 +1,4 @@
-package application;
+ package application;
 
 
 import controller.PrincipalController;
@@ -30,7 +30,7 @@ public class Main extends Application {
 			});
 
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 
 
