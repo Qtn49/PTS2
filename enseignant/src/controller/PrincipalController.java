@@ -11,11 +11,22 @@ import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
+
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -29,14 +40,37 @@ public class PrincipalController {
     @FXML
     private MediaView ressource;
 
+
+	@FXML
+	private MenuItem MQ1;
+	
+	@FXML
+	private MenuItem MQ2;
+
+	@FXML
+	private Button BQ1;
+	
+	@FXML
+	private Button backButton2;
+	
+	@FXML
+	private Button BA1;
+	
+	@FXML
+	private TextField TF1;
+	
+	@FXML
+	private TextArea TA1;
+	
+	private String aidecomp ="";
+
     @FXML
     private Button supprimer;
 
     @FXML
     private MenuItem MIQ;
 
-    @FXML
-    private Button BQ1;
+    
 
     @FXML
     private Tab ajoute;
@@ -96,6 +130,7 @@ public class PrincipalController {
     public void dragOver (DragEvent event) {
 
         Dragboard dragboard = event.getDragboard();
+
 
         if (dragboard.hasFiles())
             event.acceptTransferModes(TransferMode.COPY);
@@ -173,6 +208,24 @@ public class PrincipalController {
 
     }
 
+	
+	
+	
+	@FXML
+	public void supprimer (Event event) {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/alerteSuppressionExo.fxml"));
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		try {
+			stage.setScene(new Scene(loader.load()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		stage.show();
+	}
+	
 	@FXML
 	public void quitter() {
 		Stage stage = new Stage();
@@ -186,10 +239,24 @@ public class PrincipalController {
 		}
 		stage.show();
 	}
+	
+	@FXML
+	public void Display (ActionEvent event) {
+		String aide = TF1.getText();
+		aidecomp = aidecomp + "\n" + TF1.getText();
+		TA1.setText(aidecomp);
+		
+		
+	}
 
 	@FXML
 	public void part() {
 		Platform.exit();
+	}
+	
+	@FXML
+	public void goback(ActionEvent event) {
+		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
 
     public void supprimer() {
@@ -211,15 +278,11 @@ public class PrincipalController {
             ajoute.getTabPane().getTabs().add(nbSection - 1, tab);
             ajoute.getTabPane().getSelectionModel().select(tab);
 
-//            if (zoneTemps.getChildren().size() - 1 != nbSection) {
+            HBox newTemps = FXMLLoader.load(getClass().getResource("/ressources/fxml/tempsSection.fxml"));
+            Label label = (Label) newTemps.getChildren().get(0);
+            label.setText("Section " + nbSection + " :");
 
-                HBox newTemps = FXMLLoader.load(getClass().getResource("/ressources/fxml/tempsSection.fxml"));
-                Label label = (Label) newTemps.getChildren().get(0);
-                label.setText("Section " + nbSection + " :");
-
-                zoneTemps.getChildren().add(nbSection - 1, newTemps);
-
-//            }
+            zoneTemps.getChildren().add(nbSection - 1, newTemps);
 
         }
 

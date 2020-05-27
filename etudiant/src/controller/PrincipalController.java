@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +37,9 @@ public class PrincipalController {
 	@FXML
 	private Button cancelButton;
 	
+	@FXML
+	private Button backButton;
+	
 	private Stage stage;
 	
 	@FXML
@@ -44,6 +48,10 @@ public class PrincipalController {
 	private ImageView iconRessource;
 	@FXML
 	private ScrollBar defilerLecture;
+	@FXML
+	private Button pauseButton;
+	@FXML
+	private Button playButton;
 	
 	@FXML
 	public void quitter (Event event) {
@@ -71,7 +79,13 @@ public class PrincipalController {
 	}
 	
 	@FXML
+
+	public void goback(ActionEvent event) {
+		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+	}
+
 	public void cancelsolu (MouseEvent event) {
+
 		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
 	
@@ -88,7 +102,13 @@ public class PrincipalController {
 		stage = primaryStage;
 		
 	}
+	
+	
 
+	@FXML
+	public void play (ActionEvent event) {
+		
+	}
 	public void init() {
 		
 		File file = new File("src/ressources/videos/PostMaloneBetterNow.mp4");
@@ -121,6 +141,12 @@ public class PrincipalController {
 		});
 		
 		ressource.setMediaPlayer(media);
+		
+	}
+	
+	private void pause (ActionEvent event) {
+		ressource.getMediaPlayer().pause();
+		
 		
 	}
 	

@@ -18,10 +18,10 @@ public class Main extends Application {
 			primaryStage.setTitle("Accueil");
 			primaryStage.show();
 
+
 			PrincipalController controller = loader.getController();
-
-
 			controller.setStage(primaryStage);
+
 
 			primaryStage.setOnCloseRequest(event -> {
 				event.consume();
@@ -29,13 +29,15 @@ public class Main extends Application {
 
 			});
 
-			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 }
