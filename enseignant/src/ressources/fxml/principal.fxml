@@ -38,7 +38,7 @@
                         </Label>
                         <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
                           <tabs>
-                            <Tab onCloseRequest="#fermer" text="section 1">
+                            <Tab onClosed="#fermer" text="section 1">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -137,7 +137,7 @@
                   <CheckBox layoutX="69.0" layoutY="64.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="219.0" text="Mot incomplet (autoriser)" />
                   <CheckBox layoutX="383.0" layoutY="39.0" mnemonicParsing="false" text="Limite de temps" />
                   <CheckBox layoutX="21.0" layoutY="39.0" mnemonicParsing="false" text="Mode apprentissage" />
-                  <VBox layoutX="690.9619140625" layoutY="54.0" spacing="10.0">
+                  <VBox fx:id="zoneTemps" layoutX="690.9619140625" layoutY="54.0" spacing="10.0">
                      <children>
                         <HBox spacing="5.0">
                            <children>

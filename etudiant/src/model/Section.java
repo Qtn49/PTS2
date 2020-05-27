@@ -1,28 +1,44 @@
 package model;
 
+import javafx.scene.control.TextArea;
+
 public class Section {
 
 	
 	int temps, numero;
-	String texte, solution;
+	TextArea solution;
+	String texte;
 	
 	//constructeurs
 	
-	public Section(String texte) {
+	public Section() {
 		super();
 		this.temps = 0 ;
 		this.numero = numero + 1;
-		this.texte = "";
 	}
 
-	//getter and setter
-	
 	public int getTemps() {
 		return temps;
 	}
 
 	public void setTemps(int temps) {
 		this.temps = temps;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public TextArea getSolution() {
+		return solution;
+	}
+
+	public void setSolution(TextArea solution) {
+		this.solution = solution;
 	}
 
 	public String getTexte() {
@@ -32,18 +48,4 @@ public class Section {
 	public void setTexte(String texte) {
 		this.texte = texte;
 	}
-
-	public String getSolution() {
-		return solution;
-	}
-
-	public void setSolution(String solution) {
-		this.solution = solution;
-	}
-	
-	
-	
-	
-	
-	
 }

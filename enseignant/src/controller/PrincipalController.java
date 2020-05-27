@@ -1,16 +1,16 @@
 package controller;
 
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -46,6 +46,9 @@ public class PrincipalController {
 
     @FXML
     private TextField motEntre;
+
+    @FXML
+    private VBox zoneTemps;
 
     public void ouvrir(ActionEvent event) {
 
@@ -199,16 +202,26 @@ public class PrincipalController {
 
     public void ajouteSection (Event event) throws IOException {
 
-        int nbTab = ajoute.getTabPane().getTabs().size();
+        int nbSection = ajoute.getTabPane().getTabs().size();
 
         if (ajoute.isSelected()) {
             Tab tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
-            tab.setText("section " + nbTab);
+            tab.setText("section " + nbSection);
             tab.setOnClosed(this::fermer);
-            ajoute.getTabPane().getTabs().add(nbTab - 1, tab);
+            ajoute.getTabPane().getTabs().add(nbSection - 1, tab);
             ajoute.getTabPane().getSelectionModel().select(tab);
-        }
 
+//            if (zoneTemps.getChildren().size() - 1 != nbSection) {
+
+                HBox newTemps = FXMLLoader.load(getClass().getResource("/ressources/fxml/tempsSection.fxml"));
+                Label label = (Label) newTemps.getChildren().get(0);
+                label.setText("Section " + nbSection + " :");
+
+                zoneTemps.getChildren().add(nbSection - 1, newTemps);
+
+//            }
+
+        }
 
     }
 
@@ -225,6 +238,22 @@ public class PrincipalController {
 
             tab.setText("section " + (pos + 1));
 
+        }
+
+        zoneTemps.getChildren().remove(0);
+
+        for (Node node : zoneTemps.getChildren()) {
+
+            if (node instanceof HBox) {
+
+                for (Node node1 : ((HBox) node).getChildren()) {
+
+                    if (node1 instanceof Label)
+                        ((Label) node1).setText(((Label) node1).getText().replaceFirst("[0-9]+", String.valueOf(zoneTemps.getChildren().indexOf(node) + 1)));
+
+                }
+
+            }
         }
 
     }

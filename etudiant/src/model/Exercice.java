@@ -1,24 +1,49 @@
 package model;
 
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.media.MediaPlayer;
+
+import java.util.ArrayList;
+
 public class Exercice {
 
-	int temps, nbSection;
-	String titre, aide, consigne;
+	ArrayList<Section> sections;
+	MediaPlayer ressource;
+	ListView<String> aide;
+	TextArea consigne;
+	String titre;
 
 	//constructeurs
 
 	public Exercice( String titre) {
 		super();
-		this.temps = 0;
+		sections = new ArrayList<>();
 		this.titre = titre;
 	}
 
-	public int getTemps() {
-		return temps;
+	public MediaPlayer getRessource() {
+		return ressource;
 	}
 
-	public void setTemps(int temps) {
-		this.temps = temps;
+	public void setRessource(MediaPlayer ressource) {
+		this.ressource = ressource;
+	}
+
+	public ListView<String> getAide() {
+		return aide;
+	}
+
+	public void setAide(ListView<String> aide) {
+		this.aide = aide;
+	}
+
+	public TextArea getConsigne() {
+		return consigne;
+	}
+
+	public void setConsigne(TextArea consigne) {
+		this.consigne = consigne;
 	}
 
 	public String getTitre() {
@@ -28,24 +53,4 @@ public class Exercice {
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-
-	public String getAide() {
-		return aide;
-	}
-
-	public void setAide(String aide) {
-		this.aide = aide;
-	}
-
-	public String getConsigne() {
-		return consigne;
-	}
-
-	public void setConsigne(String consigne) {
-		this.consigne = consigne;
-	}
-
-
-
-
 }
