@@ -1,6 +1,8 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -72,6 +74,17 @@ public class PrincipalController {
 
     @FXML
     private VBox zoneTemps;
+
+    public void init () {
+
+        DoubleProperty width = ressource.fitWidthProperty();
+        DoubleProperty height = ressource.fitHeightProperty();
+        width.bind(Bindings.selectDouble(ressource.sceneProperty(), "width"));
+        height.bind(Bindings.selectDouble(ressource.sceneProperty(), "height"));
+
+        ressource.setPreserveRatio(true);
+
+    }
 
     public void ouvrir(ActionEvent event) {
 
@@ -340,8 +353,12 @@ public class PrincipalController {
                 return;
         }
 
-        aideMots.getItems().add(motEntre.getText());
-        motEntre.setText("");
+        if (!motEntre.getText().equals("")) {
+
+            aideMots.getItems().add(motEntre.getText());
+            motEntre.setText("");
+
+        }
 
     }
 

@@ -14,151 +14,15 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
-   <center>
-      <VBox>
-         <children>
-            <HBox>
-               <children>
-                  <VBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-                     <children>
-                        <Label alignment="BASELINE_RIGHT" text="Texte">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="5.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
-                          <tabs>
-                            <Tab onClosed="#fermer" text="section 1">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <TextArea layoutX="100.0" layoutY="46.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                            <Tab fx:id="ajoute" closable="false" onSelectionChanged="#ajouteSection" text="+" />
-                          </tabs>
-                        </TabPane>
-                        <VBox>
-                           <children>
-                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" spacing="70.0">
-                                 <children>
-                                    <VBox>
-                                       <children>
-                                          <Label text="Aide">
-                                             <font>
-                                                <Font name="DejaVu Sans Bold" size="37.0" />
-                                             </font>
-                                          </Label>
-                                          <ListView fx:id="aideMots" onKeyReleased="#retirerMot" prefHeight="200.0" prefWidth="200.0" />
-                                       </children>
-                                    </VBox>
-                                    <VBox alignment="CENTER" spacing="30.0">
-                                       <children>
-                                          <TextField fx:id="motEntre" onKeyReleased="#ajouterMot" />
-                                          <Button mnemonicParsing="false" onAction="#ajouterMot" text="Ajouter">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
-                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0">
-                     <children>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Consigne">
-                           <font>
-                              <Font name="System Bold" size="27.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Label>
-                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" />
-                        <AnchorPane>
-                           <children>
-                              <Label fx:id="labelRessource" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="538.0" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="200.0" left="30.0" right="30.0" top="200.0" />
-                                 </padding>
-                              </Label>
-                              <MediaView fx:id="ressource" fitHeight="400.0" fitWidth="600.0" onDragDropped="#importer" onDragOver="#dragOver" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <Button fx:id="supprimer" disable="true" layoutX="264.0" layoutY="384.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
-                              <MediaView fitHeight="400.0" fitWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </AnchorPane>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" top="10.0" />
-                     </padding>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </HBox>
-          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-               <children>
-                  <Label text="Options : ">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <CheckBox layoutX="21.0" layoutY="127.0" mnemonicParsing="false" text="Mode évaluation" />
-                  <CheckBox layoutX="68.0" layoutY="89.0" mnemonicParsing="false" text="Autoriser l'affichage de la solution">
-                     <padding>
-                        <Insets bottom="20.0" />
-                     </padding>
-                  </CheckBox>
-                  <CheckBox layoutX="69.0" layoutY="64.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="219.0" text="Mot incomplet (autoriser)" />
-                  <CheckBox layoutX="383.0" layoutY="39.0" mnemonicParsing="false" text="Limite de temps" />
-                  <CheckBox layoutX="21.0" layoutY="39.0" mnemonicParsing="false" text="Mode apprentissage" />
-                  <VBox fx:id="zoneTemps" layoutX="690.9619140625" layoutY="54.0" spacing="10.0">
-                     <children>
-                        <HBox spacing="5.0">
-                           <children>
-                              <Label text="Section 1 :" />
-                              <Spinner onInputMethodTextChanged="#afficherTemps" />
-                           </children>
-                        </HBox>
-                        <Label text="Total : " />
-                     </children>
-                  </VBox>
-               </children>
-          </AnchorPane>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </padding>
-      </VBox>
-   </center>
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
+   <children>
+      <MenuBar VBox.vgrow="ALWAYS">
       <menus>
         <Menu mnemonicParsing="false" text="Fichier">
           <items>
@@ -177,5 +41,128 @@
         </Menu>
       </menus>
       </MenuBar>
-   </top>
-</BorderPane>
+      <VBox prefHeight="613.0" prefWidth="141.0" VBox.vgrow="ALWAYS">
+         <children>
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Texte" />
+                        <TabPane minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+                          <tabs>
+                            <Tab onClosed="#fermer" text="section 1">
+                              <content>
+                                    <VBox>
+                                       <children>
+                                          <TextArea minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
+                                       </children>
+                                    </VBox>
+                              </content>
+                            </Tab>
+                            <Tab fx:id="ajoute" closable="false" onSelectionChanged="#ajouteSection" text="+" />
+                          </tabs>
+                        </TabPane>
+                        <VBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="84.0" prefWidth="478.0" spacing="70.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aide" />
+                                          <ListView fx:id="aideMots" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#retirerMot" prefHeight="159.0" prefWidth="259.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="30.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <TextField fx:id="motEntre" onKeyReleased="#ajouterMot" VBox.vgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" onAction="#ajouterMot" text="Ajouter" VBox.vgrow="ALWAYS">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Consigne" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="labelRessource" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <MediaView fx:id="ressource" onDragDropped="#importer" onDragOver="#dragOver" onMouseClicked="#importer" VBox.vgrow="ALWAYS" />
+                              <Button fx:id="supprimer" disable="true" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox>
+               <children>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                     <children>
+                        <Label text="Options : ">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <CheckBox layoutX="21.0" layoutY="127.0" mnemonicParsing="false" text="Mode évaluation" />
+                        <CheckBox layoutX="68.0" layoutY="89.0" mnemonicParsing="false" text="Autoriser l'affichage de la solution">
+                           <padding>
+                              <Insets bottom="20.0" />
+                           </padding>
+                        </CheckBox>
+                        <CheckBox layoutX="69.0" layoutY="64.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="219.0" text="Mot incomplet (autoriser)" />
+                        <CheckBox layoutX="383.0" layoutY="39.0" mnemonicParsing="false" text="Limite de temps" />
+                        <CheckBox layoutX="21.0" layoutY="39.0" mnemonicParsing="false" text="Mode apprentissage" />
+                        <VBox fx:id="zoneTemps" layoutX="690.9619140625" layoutY="54.0" spacing="10.0">
+                           <children>
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Label text="Section 1 :" />
+                                    <Spinner />
+                                 </children>
+                              </HBox>
+                              <Label text="Total : " />
+                           </children>
+                        </VBox>
+                     </children>
+                </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>
