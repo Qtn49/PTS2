@@ -4,3 +4,7 @@
      -fx-alignment: center;
      -fx-text-alignment: center;
 }
+
+ .remove {
+     -fx-opacity: 0;
+ }

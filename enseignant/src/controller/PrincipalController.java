@@ -1,6 +1,8 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -59,11 +61,6 @@ public class PrincipalController {
     @FXML
     private MenuItem MIQ;
 
-    
-
-    @FXML
-    private Tab ajoute;
-
     @FXML
     private ListView<String> aideMots;
 
@@ -71,7 +68,24 @@ public class PrincipalController {
     private TextField motEntre;
 
     @FXML
+    private Tab ajoute;
+
+    @FXML
     private VBox zoneTemps;
+
+    public void init () {
+
+//        DoubleProperty width = ressource.fitWidthProperty();
+//        DoubleProperty height = ressource.fitHeightProperty();
+//        width.bind(Bindings.selectDouble(ressource.sceneProperty(), "width"));
+//        height.bind(Bindings.selectDouble(ressource.sceneProperty(), "height"));
+
+        Spinner spinner = (Spinner) ((HBox) zoneTemps.getChildren().get(0)).getChildren().get(1);
+        spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 0));
+
+        ressource.setPreserveRatio(true);
+
+    }
 
     public void ouvrir(ActionEvent event) {
 
@@ -87,6 +101,7 @@ public class PrincipalController {
             scene = new Scene(loader.load());
             controller = loader.getController();
             controller.setStage(stage);
+            controller.init();
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -244,7 +259,7 @@ public class PrincipalController {
 	}
 	
 	@FXML
-	public void goback(ActionEvent event) {
+	public void goBack(ActionEvent event) {
 		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
 	
@@ -281,39 +296,57 @@ public class PrincipalController {
 
     public void ajouteSection (Event event) throws IOException {
 
-        int nbSection = ajoute.getTabPane().getTabs().size();
+        TabPane tabs = ((Tab) event.getSource()).getTabPane();
 
-        if (ajoute.isSelected()) {
+        System.out.println(zoneTemps);
+        int nbSection = tabs.getTabs().size();
+
+        if (tabs.getSelectionModel().getSelectedItem().getText().equals("+")) {
+
             Tab tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
             tab.setText("section " + nbSection);
             tab.setOnClosed(this::fermer);
+
             ajoute.getTabPane().getTabs().add(nbSection - 1, tab);
             ajoute.getTabPane().getSelectionModel().select(tab);
 
             HBox newTemps = FXMLLoader.load(getClass().getResource("/ressources/fxml/tempsSection.fxml"));
+            Spinner spinner = (Spinner) newTemps.getChildren().get(1);
+            spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 0));
+
             Label label = (Label) newTemps.getChildren().get(0);
             label.setText("Section " + nbSection + " :");
 
             zoneTemps.getChildren().add(nbSection - 1, newTemps);
 
+            tabs.getSelectionModel().select(nbSection - 1);
+
+            if (nbSection >= 4) {
+                ajoute.getStyleClass().add("remove");
+            }
+
         }
 
     }
 
-    public void fermer (Event event) {
+    public void fermer(Event event) {
 
-        TabPane pane = ajoute.getTabPane();
+        TabPane tabs = ajoute.getTabPane();
 
-        for (Tab tab : pane.getTabs()) {
+        ajoute.getStyleClass().remove("remove");
+
+        for (Tab tab : tabs.getTabs()) {
 
             if (tab.getText().equals("+"))
                 continue;
 
-            int pos = pane.getTabs().indexOf(tab);
+            int pos = tabs.getTabs().indexOf(tab);
 
             tab.setText("section " + (pos + 1));
 
         }
+
+        System.out.println(zoneTemps);
 
         zoneTemps.getChildren().remove(0);
 
@@ -340,8 +373,12 @@ public class PrincipalController {
                 return;
         }
 
-        aideMots.getItems().add(motEntre.getText());
-        motEntre.setText("");
+        if (!motEntre.getText().equals("")) {
+
+            aideMots.getItems().add(motEntre.getText());
+            motEntre.setText("");
+
+        }
 
     }
 

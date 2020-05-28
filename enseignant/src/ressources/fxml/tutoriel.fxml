@@ -172,7 +172,7 @@
                   <MenuItem mnemonicParsing="false" text="Importer une ressource..." />
             <MenuItem disable="true" mnemonicParsing="false" text="Sauvegarder " />
             <MenuItem mnemonicParsing="false" text="Sauvegarder sous..." />
-            <MenuItem mnemonicParsing="false" text="Quitter" />
+            <MenuItem mnemonicParsing="false" onAction="#part" text="Quitter" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Aide">

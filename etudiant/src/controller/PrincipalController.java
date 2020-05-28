@@ -27,16 +27,16 @@ import javafx.util.Duration;
 public class PrincipalController {
 	@FXML
 	private MenuItem MIQ;
-	
+
 	@FXML
 	private Button BQ1;
-	
+
 	@FXML
 	private Button BS1;
-	
+
 	@FXML
 	private Button cancelButton;
-	
+
 	@FXML
 	private Button backButton;
 	
@@ -48,10 +48,6 @@ public class PrincipalController {
 	private ImageView iconRessource;
 	@FXML
 	private ScrollBar defilerLecture;
-	@FXML
-	private Button pauseButton;
-	@FXML
-	private Button playButton;
 	
 	@FXML
 	public void quitter (Event event) {
@@ -143,7 +139,8 @@ public class PrincipalController {
 		ressource.setMediaPlayer(media);
 		
 	}
-	
+
+	@FXML
 	private void pause (ActionEvent event) {
 		MediaPlayer player = ressource.getMediaPlayer();
 		player.pause();

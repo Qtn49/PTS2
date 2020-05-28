@@ -22,14 +22,14 @@ public class Main extends Application {
 			PrincipalController controller = loader.getController();
 			controller.setStage(primaryStage);
 
-
 			primaryStage.setOnCloseRequest(event -> {
+				System.out.println("aurevoir quand même");
 				event.consume();
 				controller.quitter();
-
 			});
 
-		} catch (Exception e) {
+
+		} catch (Exception ignored) {
 
 		}
 
