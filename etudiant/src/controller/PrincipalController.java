@@ -16,10 +16,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -44,10 +47,12 @@ public class PrincipalController {
 	
 	@FXML
 	private MediaView ressource;
-	@FXML
-	private ImageView iconRessource;
+	
 	@FXML
 	private ScrollBar defilerLecture;
+	
+	@FXML
+	private ToggleButton playButton, pauseButton;
 	
 	@FXML
 	public void quitter (Event event) {
@@ -103,38 +108,29 @@ public class PrincipalController {
 
 	@FXML
 	public void play (ActionEvent event) {
+	
+		if (ressource.getMediaPlayer().getStatus() == Status.PLAYING) {
+			playButton.setSelected(true);
+			return;
+		}
+		
+		pauseButton.setSelected(false);
+		ressource.getMediaPlayer().play();
 		
 	}
+	
 	public void init() {
 		
-		File file = new File("src/ressources/videos/PostMaloneBetterNow.mp4");
+		File file = new File("src/ressources/videos/angele.mp4");
 		
 		defilerLecture.valueProperty().addListener((observable, oldValue, newValue) -> deplacerCurseur(observable, oldValue, newValue));
 		
 		MediaPlayer media = new MediaPlayer(new Media(file.toURI().toString()));
-		if (file.getName().matches(".*\\.mp4$"))
-			iconRessource.visibleProperty().set(false);
 		
-		media.currentTimeProperty().addListener(new InvalidationListener() {
-			
-			@Override
-			public void invalidated(Observable observable) {
-				// TODO Auto-generated method stub
-				updateCurseur();
-				
-			}
-		});
+		media.currentTimeProperty().addListener((observable, oldValue, newValue) -> updateCurseur(observable, oldValue, newValue));
 		
-		media.setOnReady(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				media.play();
-				updateCurseur();
-				
-			}
-		});
+		ressource.setFitWidth(((VBox) ressource.getParent()).getWidth());
+		ressource.setFitHeight(((VBox) ressource.getParent()).getHeight());
 		
 		ressource.setMediaPlayer(media);
 		
@@ -143,14 +139,22 @@ public class PrincipalController {
 	@FXML
 	private void pause (ActionEvent event) {
 		MediaPlayer player = ressource.getMediaPlayer();
+		
+		if (player.getStatus() == Status.PAUSED) {
+			playButton.setSelected(true);
+			return;
+		}
+		
+		playButton.setSelected(false);
+		
 		player.pause();
 	}
 	
-	private void updateCurseur() {
+	private void updateCurseur(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
 
 		MediaPlayer player = ressource.getMediaPlayer();
 		
-		double curseur = player.getCurrentTime().toSeconds() * 100 / player.getTotalDuration().toSeconds();
+		int curseur = (int) (Math.floor(newValue.toSeconds()) * 100 / Math.floor(player.getTotalDuration().toSeconds()));
 		
 		defilerLecture.setValue(curseur);
 		

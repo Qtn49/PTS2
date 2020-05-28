@@ -21,7 +21,7 @@
     <bottom>
         <HBox alignment="CENTER" spacing="60.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="backButton2" mnemonicParsing="false" onAction="#goback" text="Annuler" />
+                <Button fx:id="backButton2" mnemonicParsing="false" onAction="#goBack" text="Annuler" />
                 <Button fx:id="confButton" mnemonicParsing="false" onAction="#supprimerRessource" text="Confirmer" />
             </children>
             <BorderPane.margin>

@@ -61,11 +61,6 @@ public class PrincipalController {
     @FXML
     private MenuItem MIQ;
 
-    
-
-    @FXML
-    private Tab ajoute;
-
     @FXML
     private ListView<String> aideMots;
 
@@ -257,7 +252,7 @@ public class PrincipalController {
 	}
 	
 	@FXML
-	public void goback(ActionEvent event) {
+	public void goBack(ActionEvent event) {
 		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
 	
@@ -294,14 +289,17 @@ public class PrincipalController {
 
     public void ajouteSection (Event event) throws IOException {
 
-        int nbSection = ajoute.getTabPane().getTabs().size();
+        TabPane tabs = ((Tab) event.getSource()).getTabPane();
 
-        if (ajoute.isSelected()) {
+        System.out.println(tabs);
+        int nbSection = tabs.getTabs().size();
+
+        if (tabs.getSelectionModel().getSelectedItem().getText().equals("+")) {
+
             Tab tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
             tab.setText("section " + nbSection);
             tab.setOnClosed(this::fermer);
-            ajoute.getTabPane().getTabs().add(nbSection - 1, tab);
-            ajoute.getTabPane().getSelectionModel().select(tab);
+            tabs.getTabs().add(nbSection - 1, tab);
 
             HBox newTemps = FXMLLoader.load(getClass().getResource("/ressources/fxml/tempsSection.fxml"));
             Label label = (Label) newTemps.getChildren().get(0);
@@ -309,24 +307,36 @@ public class PrincipalController {
 
             zoneTemps.getChildren().add(nbSection - 1, newTemps);
 
+            tabs.getSelectionModel().select(nbSection - 1);
+
+            if (nbSection >= 4) {
+                tabs.getTabs().remove(tabs.getTabs().size() - 1);
+            }
+
         }
 
     }
 
     public void fermer (Event event) {
 
-        TabPane pane = ajoute.getTabPane();
+        TabPane tabs = ((Tab) event.getSource()).getTabPane();
 
-        for (Tab tab : pane.getTabs()) {
+        System.out.println();
+
+        tabs.getTabs().remove(event.getSource());
+
+        for (Tab tab : tabs.getTabs()) {
 
             if (tab.getText().equals("+"))
                 continue;
 
-            int pos = pane.getTabs().indexOf(tab);
+            int pos = tabs.getTabs().indexOf(tab);
 
             tab.setText("section " + (pos + 1));
 
         }
+
+        System.out.println(zoneTemps);
 
         zoneTemps.getChildren().remove(0);
 

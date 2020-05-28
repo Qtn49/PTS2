@@ -18,7 +18,7 @@
             </Text>
             <BorderPane fx:id="A2" layoutX="142.0" layoutY="227.0" prefHeight="112.0" prefWidth="369.0" AnchorPane.bottomAnchor="35.39999999999998">
                <left>
-                  <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goback" text="Annuler" translateX="30.0" BorderPane.alignment="CENTER">
+                  <Button fx:id="backButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#goBack" text="Annuler" translateX="30.0" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="15.0" />
                      </font>

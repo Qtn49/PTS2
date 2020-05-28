@@ -21,7 +21,7 @@ public class Main extends Application {
 
 			PrincipalController controller = loader.getController();
 			controller.setStage(primaryStage);
-
+			controller.init();
 
 			primaryStage.setOnCloseRequest(event -> {
 				event.consume();
