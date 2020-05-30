@@ -293,7 +293,7 @@ public class PrincipalController {
 
     }
 
-    public void ajouteSection (Event event) throws IOException {
+    public void ajouteSection (Event event) {
 
         TabPane tabs = ((Tab) event.getSource()).getTabPane();
 
@@ -302,14 +302,26 @@ public class PrincipalController {
 
         if (tabs.getSelectionModel().getSelectedItem().getText().equals("+")) {
 
-            Tab tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
-            tab.setText("section " + nbSection);
-            tab.setOnClosed(this::fermer);
+            Tab tab = null;
+            try {
+                tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
+                tab.setText("section " + nbSection);
+                tab.setOnCloseRequest(this::fermer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            ajoute.getTabPane().getTabs().add(nbSection - 1, tab);
-            ajoute.getTabPane().getSelectionModel().select(tab);
 
-            HBox newTemps = FXMLLoader.load(getClass().getResource("/ressources/fxml/tempsSection.fxml"));
+
+            tabs.getTabs().add(nbSection - 1, tab);
+            tabs.getSelectionModel().select(tab);
+
+            HBox newTemps = null;
+            try {
+                newTemps = FXMLLoader.load(getClass().getResource("/ressources/fxml/tempsSection.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Spinner spinner = (Spinner) newTemps.getChildren().get(1);
             spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 20, 0));
 
@@ -321,7 +333,7 @@ public class PrincipalController {
             tabs.getSelectionModel().select(nbSection - 1);
 
             if (nbSection >= 4) {
-                ajoute.getStyleClass().add("remove");
+                tabs.getTabs().remove(tabs.getTabs().remove(tabs.getTabs().size() - 1));
             }
 
         }
@@ -330,9 +342,15 @@ public class PrincipalController {
 
     public void fermer(Event event) {
 
-        TabPane tabs = ajoute.getTabPane();
+        TabPane tabs = ((Tab) event.getSource()).getTabPane();
 
-        ajoute.getStyleClass().remove("remove");
+        System.out.println(tabs.getTabs().size());
+
+        if (!tabs.getTabs().get(tabs.getTabs().size() - 1).getText().equals("+")) {
+            Tab tab = new Tab("+");
+            tab.setOnSelectionChanged(this::ajouteSection);
+            tabs.getTabs().add(tab);
+        }
 
         for (Tab tab : tabs.getTabs()) {
 
