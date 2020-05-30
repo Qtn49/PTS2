@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -81,7 +82,7 @@
                         </TabPane>
                      </children>
                   </VBox>
-                  <HBox alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" VBox.vgrow="ALWAYS">
+                  <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox spacing="10.0">
                            <children>
@@ -90,26 +91,33 @@
                                     <Font name="System Bold" size="36.0" />
                                  </font>
                               </Label>
-                              <TextField />
+                              <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TextField />
+                                    <Button mnemonicParsing="false" text="Valider" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
-                        <Button mnemonicParsing="false" text="Valider">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                        <VBox spacing="10.0">
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="329.0" spacing="10.0">
                            <children>
                               <Label text="Aide">
                                  <font>
                                     <Font name="System Bold" size="36.0" />
                                  </font>
                               </Label>
-                              <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" wrapText="true" />
+                              <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="248.0" />
+                                    <Button fx:id="BS1" mnemonicParsing="false" onMouseClicked="#solution" text="Solution" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
-                        <Button fx:id="BS1" mnemonicParsing="false" onMouseClicked="#solution" text="Solution" />
                      </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
                   </HBox>
                </children>
             </VBox>
@@ -134,15 +142,14 @@
                               <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
                                  <children>
                                     <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/boutons.css" />
-                                    <ToggleButton fx:id="PauseButton" mnemonicParsing="false" onAction="#pause" styleClass="pause" stylesheets="@../css/boutons.css" />
+                                    <ToggleButton fx:id="pauseButton" mnemonicParsing="false" onAction="#pause" selected="true" styleClass="pause" stylesheets="@../css/boutons.css" />
                                     <Button mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/boutons.css" />
                                     <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/boutons.css" />
-                                    <ScrollBar fx:id="defilerLecture" prefHeight="17.0" prefWidth="433.0" />
-                                    <ToggleButton mnemonicParsing="false" onAction="#mute" styleClass="soundOff" stylesheets="@../css/boutons.css" />
+                                    <ScrollBar fx:id="defilerLecture" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS" />
                                     <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/boutons.css" />
                                  </children>
                                  <padding>
-                                    <Insets left="15.0" />
+                                    <Insets left="15.0" right="10.0" />
                                  </padding>
                               </HBox>
                           </items>

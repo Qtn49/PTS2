@@ -8,4 +8,7 @@ production/*
 artifacts
 test.exo
 META-INF
+<<<<<<< HEAD
 *.jar
+=======
+>>>>>>> d5a964f7eea8a94cb1e18d56c934a326ce0bd193

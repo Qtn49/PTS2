@@ -23,7 +23,6 @@ public class Main extends Application {
 			controller.setStage(primaryStage);
 
 			primaryStage.setOnCloseRequest(event -> {
-				System.out.println("aurevoir quand même");
 				event.consume();
 				controller.quitter();
 			});

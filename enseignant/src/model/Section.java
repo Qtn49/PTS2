@@ -5,16 +5,15 @@ import javafx.scene.control.TextArea;
 public class Section {
 
 	
-	int temps, numero;
-	TextArea solution;
-	String texte;
+	int temps;
+	String solution;
+	String texteOccultee;
 	
 	//constructeurs
 	
 	public Section() {
 		super();
 		this.temps = 0 ;
-		this.numero = numero + 1;
 	}
 
 	public int getTemps() {
@@ -25,27 +24,19 @@ public class Section {
 		this.temps = temps;
 	}
 
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public TextArea getSolution() {
+	public String getSolution() {
 		return solution;
 	}
 
-	public void setSolution(TextArea solution) {
+	public void setSolution(String solution) {
 		this.solution = solution;
 	}
 
-	public String getTexte() {
-		return texte;
+	public String getTexteOccultee() {
+		return texteOccultee;
 	}
 
-	public void setTexte(String texte) {
-		this.texte = texte;
+	public void setTexteOccultee(String texteOccultee) {
+		this.texteOccultee = texteOccultee;
 	}
 }

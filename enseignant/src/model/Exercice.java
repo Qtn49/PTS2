@@ -1,56 +1,105 @@
 package model;
 
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.media.MediaPlayer;
-
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Exercice {
 
 	ArrayList<Section> sections;
-	MediaPlayer ressource;
-	ListView<String> aide;
-	TextArea consigne;
-	String titre;
+	String cheminRessource;
+	LinkedList<String> aide;
+	String consigne;
+	boolean modeEvaluation;
+	boolean limiteTps;
+	boolean affichageSolution;
+	boolean motIncomplet;
+	boolean sensibiliteCasse;
 
 	//constructeurs
 
-	public Exercice( String titre) {
+	public Exercice(boolean modeEvaluation) {
 		super();
+		this.modeEvaluation = modeEvaluation;
 		sections = new ArrayList<>();
-		this.titre = titre;
 	}
 
-	public MediaPlayer getRessource() {
-		return ressource;
+	public void addSection (int index, Section section) {
+		sections.add(index, section);
 	}
 
-	public void setRessource(MediaPlayer ressource) {
-		this.ressource = ressource;
+	public Section getSection (int index) {
+		return sections.get(index);
 	}
 
-	public ListView<String> getAide() {
+	public ArrayList<Section> getSections() {
+		return sections;
+	}
+
+	public void setSections(ArrayList<Section> sections) {
+		this.sections = sections;
+	}
+
+	public String getCheminRessource() {
+		return cheminRessource;
+	}
+
+	public void setCheminRessource(String cheminRessource) {
+		this.cheminRessource = cheminRessource;
+	}
+
+	public LinkedList<String> getAide() {
 		return aide;
 	}
 
-	public void setAide(ListView<String> aide) {
+	public void setAide(LinkedList<String> aide) {
 		this.aide = aide;
 	}
 
-	public TextArea getConsigne() {
+	public String getConsigne() {
 		return consigne;
 	}
 
-	public void setConsigne(TextArea consigne) {
+	public void setConsigne(String consigne) {
 		this.consigne = consigne;
 	}
 
-	public String getTitre() {
-		return titre;
+	public boolean isModeEvaluation() {
+		return modeEvaluation;
 	}
 
-	public void setTitre(String titre) {
-		this.titre = titre;
+	public void setModeEvaluation(boolean modeEvaluation) {
+		this.modeEvaluation = modeEvaluation;
+	}
+
+	public boolean isLimiteTps() {
+		return limiteTps;
+	}
+
+	public void setLimiteTps(boolean limiteTps) {
+		this.limiteTps = limiteTps;
+	}
+
+	public boolean isAffichageSolution() {
+		return affichageSolution;
+	}
+
+	public void setAffichageSolution(boolean affichageSolution) {
+		this.affichageSolution = affichageSolution;
+	}
+
+	public boolean isMotIncomplet() {
+		return motIncomplet;
+	}
+
+	public void setMotIncomplet(boolean motIncomplet) {
+		this.motIncomplet = motIncomplet;
+	}
+
+	public boolean isSensibiliteCasse() {
+		return sensibiliteCasse;
+	}
+
+	public void setSensibiliteCasse(boolean sensibiliteCasse) {
+		this.sensibiliteCasse = sensibiliteCasse;
 	}
 }

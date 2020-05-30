@@ -74,7 +74,6 @@ public class PrincipalController {
     private VBox zoneTemps;
 
     public void init () {
-
 //        DoubleProperty width = ressource.fitWidthProperty();
 //        DoubleProperty height = ressource.fitHeightProperty();
 //        width.bind(Bindings.selectDouble(ressource.sceneProperty(), "width"));
