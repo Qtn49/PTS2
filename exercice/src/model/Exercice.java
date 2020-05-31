@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Exercice {
+public class Exercice implements Serializable {
 
 	ArrayList<Section> sections;
 	String cheminRessource;
@@ -106,4 +107,5 @@ public class Exercice {
 	public void setSensibiliteCasse(boolean sensibiliteCasse) {
 		this.sensibiliteCasse = sensibiliteCasse;
 	}
+
 }

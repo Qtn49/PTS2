@@ -2,7 +2,9 @@ package model;
 
 import javafx.scene.control.TextArea;
 
-public class Section {
+import java.io.Serializable;
+
+public class Section implements Serializable {
 
 	
 	int temps;
@@ -10,10 +12,17 @@ public class Section {
 	String texteOccultee;
 	
 	//constructeurs
-	
-	public Section() {
-		super();
-		this.temps = 0 ;
+
+	public Section(int temps, String solution) {
+		this.temps = temps;
+		this.solution = solution;
+		genererTextOcculte();
+	}
+
+	private void genererTextOcculte() {
+
+		texteOccultee = solution.replaceAll("[a-zA-Z0-9]", "#");
+
 	}
 
 	public int getTemps() {
