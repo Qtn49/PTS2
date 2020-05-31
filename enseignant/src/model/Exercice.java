@@ -5,22 +5,26 @@ import java.util.LinkedList;
 
 public class Exercice {
 
-	ArrayList<Section> sections;
-	String cheminRessource;
-	LinkedList<String> aide;
-	String consigne;
-	boolean modeEvaluation;
-	boolean limiteTps;
-	boolean affichageSolution;
-	boolean motIncomplet;
-	boolean sensibiliteCasse;
+	private ArrayList<Section> sections;
+	private String cheminRessource;
+	private LinkedList<String> aide;
+	private String consigne;
+	private boolean modeEvaluation;
+	private boolean limiteTps;
+	private boolean affichageSolution;
+	private boolean motIncomplet;
+	private boolean sensibiliteCasse;
 
 	//constructeurs
 
-	public Exercice(boolean modeEvaluation) {
-		super();
+
+	public Exercice(ArrayList<Section> sections, String cheminRessource, LinkedList<String> aide, String consigne, boolean modeEvaluation, boolean limiteTps) {
+		this.sections = sections;
+		this.cheminRessource = cheminRessource;
+		this.aide = aide;
+		this.consigne = consigne;
 		this.modeEvaluation = modeEvaluation;
-		sections = new ArrayList<>();
+		this.limiteTps = limiteTps;
 	}
 
 	public void addSection (int index, Section section) {

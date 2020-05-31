@@ -1,7 +1,10 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.Enumeration;
+import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -24,6 +27,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -103,7 +107,26 @@ public class PrincipalController {
 		
 	}
 	
-	
+	public void ouvrir (ActionEvent event) throws IOException {
+
+		FileChooser chooser = new FileChooser();
+		chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("exercice (*.exo)", "*.exo"));
+		File file = chooser.showOpenDialog(stage);
+		ZipFile zipFile = new ZipFile(file);
+
+		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+
+		while (entries.hasMoreElements()) {
+			ZipEntry entry = entries.nextElement();
+			InputStream stream = zipFile.getInputStream(entry);
+			Scanner scanner = new Scanner(stream);
+
+			while (scanner.hasNext()) {
+				System.out.println(scanner.nextLine());
+			}
+		}
+
+	}
 
 	@FXML
 	public void play (ActionEvent event) {
