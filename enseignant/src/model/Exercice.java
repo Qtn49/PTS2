@@ -17,10 +17,14 @@ public class Exercice {
 
 	//constructeurs
 
-	public Exercice(boolean modeEvaluation) {
-		super();
+
+	public Exercice(ArrayList<Section> sections, String cheminRessource, LinkedList<String> aide, String consigne, boolean modeEvaluation, boolean limiteTps) {
+		this.sections = sections;
+		this.cheminRessource = cheminRessource;
+		this.aide = aide;
+		this.consigne = consigne;
 		this.modeEvaluation = modeEvaluation;
-		sections = new ArrayList<>();
+		this.limiteTps = limiteTps;
 	}
 
 	public void addSection (int index, Section section) {
