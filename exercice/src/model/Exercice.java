@@ -33,15 +33,11 @@ public class Exercice implements Serializable {
 	}
 
 	public Section getSection (int index) {
-		return sections.get(index);
+		return sections.get(index - 1);
 	}
 
-	public ArrayList<Section> getSections() {
-		return sections;
-	}
-
-	public void setSections(ArrayList<Section> sections) {
-		this.sections = sections;
+	public int nbSections () {
+		return sections.size();
 	}
 
 	public String getCheminRessource() {

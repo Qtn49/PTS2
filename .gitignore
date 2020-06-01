@@ -6,7 +6,7 @@
 production
 production/*
 artifacts
-test.exo
 META-INF
 *.jar
 *.o
+test

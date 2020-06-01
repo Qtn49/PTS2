@@ -1,14 +1,15 @@
 package controller;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.URISyntaxException;
 import java.util.Enumeration;
-import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -17,10 +18,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -30,8 +34,14 @@ import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Exercice;
 
 public class PrincipalController {
+
+	private Media media;
+
+	private Exercice exercice;
+
 	@FXML
 	private MenuItem MIQ;
 
@@ -56,7 +66,47 @@ public class PrincipalController {
 	private ScrollBar defilerLecture;
 	@FXML
 	private ToggleButton playButton, pauseButton;
-	
+
+	@FXML
+	private TextArea consigne;
+
+	@FXML
+	private TabPane sections;
+
+	@FXML
+	private ListView<String> aide;
+
+	public Exercice getExercice() {
+		return exercice;
+	}
+
+	public void setExercice(Exercice exercice) {
+
+		for (int i = 1; i <= exercice.nbSections(); i++) {
+
+			Tab tab = null;
+			try {
+				tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
+				tab.setText(tab.getText() + " " + 1);
+				VBox vBox = (VBox) tab.getContent();
+				((TextArea) vBox.getChildren().get(0)).setText(exercice.getSection(i).getTexteOccultee());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			sections.getTabs().add(tab);
+
+		}
+
+		for (String s : exercice.getAide()) {
+
+			aide.getItems().add(s);
+
+		}
+
+		consigne.setText(exercice.getConsigne());
+	}
+
 	@FXML
 	public void quitter (Event event) {
 		Stage stage = new Stage();
@@ -107,24 +157,49 @@ public class PrincipalController {
 		
 	}
 	
-	public void ouvrir (ActionEvent event) throws IOException {
+	public void ouvrir (ActionEvent event) throws IOException, ClassNotFoundException, URISyntaxException {
 
 		FileChooser chooser = new FileChooser();
 		chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("exercice (*.exo)", "*.exo"));
 		File file = chooser.showOpenDialog(stage);
 		ZipFile zipFile = new ZipFile(file);
 
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/principal.fxml"));
+		stage.setScene(new Scene(loader.load()));
+		PrincipalController controller = loader.getController();
+
+		controller.ouvrirExo(zipFile);
+
+		controller.init();
+
+	}
+
+	private void ouvrirExo (ZipFile zipFile) throws IOException, ClassNotFoundException, URISyntaxException {
+
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
-			InputStream stream = zipFile.getInputStream(entry);
-			Scanner scanner = new Scanner(stream);
 
-			while (scanner.hasNext()) {
-				System.out.println(scanner.nextLine());
+			if (entry.getName().matches(".*\\.o")) {
+
+
+				InputStream stream = zipFile.getInputStream(entry);
+				ObjectInputStream stream1 = new ObjectInputStream(stream);
+				Exercice exercice = (Exercice) stream1.readObject();
+
+				setExercice(exercice);
+
+
+
+			}else if (entry.getName().matches(".*\\.(mp4|mp3|wav)")) {
+//				InputStream stream = zipFile.getInputStream(entry);
+
+				media = new Media(getClass().getResource("/ressources/videos/betterNow.mp4").toURI().toString());
 			}
 		}
+
+		zipFile.close();
 
 	}
 
@@ -143,18 +218,27 @@ public class PrincipalController {
 	
 	public void init() {
 		
-		File file = new File("src/ressources/videos/angele.mp4");
+//		File file = new File("src/ressources/videos/angele.mp4");
 		
 		defilerLecture.valueProperty().addListener((observable, oldValue, newValue) -> deplacerCurseur(observable, oldValue, newValue));
 		
-		MediaPlayer media = new MediaPlayer(new Media(file.toURI().toString()));
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		
-		media.currentTimeProperty().addListener((observable, oldValue, newValue) -> updateCurseur(observable, oldValue, newValue));
+		mediaPlayer.setOnReady(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				mediaPlayer.play();
+			}
+		});
+		
+		mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> updateCurseur(observable, oldValue, newValue));
 		
 		ressource.setFitWidth(((VBox) ressource.getParent()).getWidth());
 		ressource.setFitHeight(((VBox) ressource.getParent()).getHeight());
-		
-		ressource.setMediaPlayer(media);
+
+		ressource.setMediaPlayer(mediaPlayer);
 		
 	}
 
@@ -184,8 +268,8 @@ public class PrincipalController {
 	
 	public void deplacerCurseur (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
         
-		double durationTotal = ressource.getMediaPlayer().getTotalDuration().toSeconds();
-		double curseur = defilerLecture.getValue() * durationTotal / 100;
+		int durationTotal = (int) Math.floor(ressource.getMediaPlayer().getTotalDuration().toSeconds());
+		int curseur = (int) (defilerLecture.getValue() * durationTotal / 100);
 		
 		ressource.getMediaPlayer().seek(Duration.seconds(curseur));
 		
