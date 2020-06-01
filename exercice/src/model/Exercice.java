@@ -108,4 +108,19 @@ public class Exercice implements Serializable {
 		this.sensibiliteCasse = sensibiliteCasse;
 	}
 
+	@java.lang.Override
+	public java.lang.String toString() {
+		return "Exercice{" +
+				"sections=" + sections +
+				", cheminRessource='" + cheminRessource + '\'' +
+				", aide=" + aide +
+				", consigne='" + consigne + '\'' +
+				", modeEvaluation=" + modeEvaluation +
+				", limiteTps=" + limiteTps +
+				", affichageSolution=" + affichageSolution +
+				", motIncomplet=" + motIncomplet +
+				", sensibiliteCasse=" + sensibiliteCasse +
+				'}';
+	}
+
 }

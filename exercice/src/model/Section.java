@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.control.TextArea;
-
 import java.io.Serializable;
 
 public class Section implements Serializable {
@@ -47,5 +45,14 @@ public class Section implements Serializable {
 
 	public void setTexteOccultee(String texteOccultee) {
 		this.texteOccultee = texteOccultee;
+	}
+
+	@Override
+	public String toString() {
+		return "Section{" +
+				"temps=" + temps +
+				", solution='" + solution + '\'' +
+				", texteOccultee='" + texteOccultee + '\'' +
+				'}';
 	}
 }

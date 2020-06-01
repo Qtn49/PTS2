@@ -1,13 +1,13 @@
 package application;
 
+import model.Exercice;
+import model.Section;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
-import model.Exercice;
-import model.Section;
 
 public class Test {
 
@@ -21,6 +21,8 @@ public class Test {
         sections.add(section);
 
         Exercice exercice = new Exercice(sections, "blc", aide, "Tu dois trouver tout seul haha !", false, true);
+
+        System.out.println(exercice);
 
         ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("test.o"));
         outputStream.writeObject(exercice);
