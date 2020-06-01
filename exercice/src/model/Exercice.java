@@ -6,15 +6,15 @@ import java.util.LinkedList;
 
 public class Exercice implements Serializable {
 
-	ArrayList<Section> sections;
-	String cheminRessource;
-	LinkedList<String> aide;
-	String consigne;
-	boolean modeEvaluation;
-	boolean limiteTps;
-	boolean affichageSolution;
-	boolean motIncomplet;
-	boolean sensibiliteCasse;
+	private ArrayList<Section> sections;
+	private String cheminRessource;
+	private LinkedList<String> aide;
+	private String consigne;
+	private boolean modeEvaluation;
+	private boolean limiteTps;
+	private boolean affichageSolution;
+	private boolean motIncomplet;
+	private boolean sensibiliteCasse;
 
 	//constructeurs
 
