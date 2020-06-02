@@ -7,7 +7,6 @@ import java.util.LinkedList;
 public class Exercice implements Serializable {
 
 	private ArrayList<Section> sections;
-	private String cheminRessource;
 	private LinkedList<String> aide;
 	private String consigne;
 	private boolean modeEvaluation;
@@ -19,9 +18,8 @@ public class Exercice implements Serializable {
 	//constructeurs
 
 
-	public Exercice(ArrayList<Section> sections, String cheminRessource, LinkedList<String> aide, String consigne, boolean modeEvaluation, boolean limiteTps) {
+	public Exercice(ArrayList<Section> sections, LinkedList<String> aide, String consigne, boolean modeEvaluation, boolean limiteTps) {
 		this.sections = sections;
-		this.cheminRessource = cheminRessource;
 		this.aide = aide;
 		this.consigne = consigne;
 		this.modeEvaluation = modeEvaluation;
@@ -38,14 +36,6 @@ public class Exercice implements Serializable {
 
 	public int nbSections () {
 		return sections.size();
-	}
-
-	public String getCheminRessource() {
-		return cheminRessource;
-	}
-
-	public void setCheminRessource(String cheminRessource) {
-		this.cheminRessource = cheminRessource;
 	}
 
 	public LinkedList<String> getAide() {
@@ -108,7 +98,6 @@ public class Exercice implements Serializable {
 	public java.lang.String toString() {
 		return "Exercice{" +
 				"sections=" + sections +
-				", cheminRessource='" + cheminRessource + '\'' +
 				", aide=" + aide +
 				", consigne='" + consigne + '\'' +
 				", modeEvaluation=" + modeEvaluation +

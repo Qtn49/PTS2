@@ -22,8 +22,6 @@ public class Test {
 
         Exercice exercice = new Exercice(sections, "blc", aide, "Tu dois trouver tout seul haha !", false, true);
 
-        System.out.println(exercice);
-
         ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("test.o"));
         outputStream.writeObject(exercice);
         outputStream.close();

@@ -1,14 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.net.URISyntaxException;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -17,14 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -35,6 +19,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Exercice;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.URISyntaxException;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class PrincipalController {
 
@@ -105,6 +98,7 @@ public class PrincipalController {
 		}
 
 		consigne.setText(exercice.getConsigne());
+
 	}
 
 	@FXML
@@ -120,7 +114,7 @@ public class PrincipalController {
 	}
 	
 	@FXML
-	public void solution (Event event) {
+	public void solution (ActionEvent event) {
 		Stage stage = new Stage();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/alerteSolution.fxml"));
 		try {
@@ -130,6 +124,23 @@ public class PrincipalController {
 			e.printStackTrace();
 		}
 		stage.show();
+	}
+
+	public void montrerSolution (ActionEvent event) {
+
+		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+
+		System.out.println(sections.getTabs());
+
+//		for (int i = 0; i < sections.getTabs().size(); i++) {
+//			VBox vBox = (VBox) sections.getTabs().get(i).getContent();
+//
+//			TextArea area = (TextArea) vBox.getChildren().get(0);
+//
+//			area.setText(exercice.getSection(i + 1).getSolution());
+//
+//		}
+
 	}
 	
 	@FXML
@@ -195,7 +206,7 @@ public class PrincipalController {
 			}else if (entry.getName().matches(".*\\.(mp4|mp3|wav)")) {
 //				InputStream stream = zipFile.getInputStream(entry);
 
-				media = new Media(getClass().getResource("/ressources/videos/betterNow.mp4").toURI().toString());
+//				media = new Media(getClass().getResource("/ressources/videos/betterNow.mp4").toURI().toString());
 			}
 		}
 
@@ -220,7 +231,7 @@ public class PrincipalController {
 		
 //		File file = new File("src/ressources/videos/angele.mp4");
 		
-		defilerLecture.valueProperty().addListener((observable, oldValue, newValue) -> deplacerCurseur(observable, oldValue, newValue));
+		defilerLecture.valueProperty().addListener(this::deplacerCurseur);
 		
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		
@@ -232,11 +243,13 @@ public class PrincipalController {
 				mediaPlayer.play();
 			}
 		});
+
+		System.out.println(sections.getTabs());
 		
-		mediaPlayer.currentTimeProperty().addListener((observable, oldValue, newValue) -> updateCurseur(observable, oldValue, newValue));
-		
-		ressource.setFitWidth(((VBox) ressource.getParent()).getWidth());
-		ressource.setFitHeight(((VBox) ressource.getParent()).getHeight());
+		mediaPlayer.currentTimeProperty().addListener(this::updateCurseur);
+
+//		ressource.setFitWidth(((VBox) ressource.getParent()).getWidth());
+//		ressource.setFitHeight(((VBox) ressource.getParent()).getHeight());
 
 		ressource.setMediaPlayer(mediaPlayer);
 		
