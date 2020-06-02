@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Exercice;
 
 import java.io.File;
 import java.io.IOException;
@@ -404,6 +405,10 @@ public class PrincipalController {
         if (event.getCode() == KeyCode.DELETE)
             aideMots.getItems().remove(aideMots.getSelectionModel().getSelectedItem());
 
+    }
+    
+    public void Sauvegarde(ActionEvent event) {
+    	Exercice unExercice = new Exercice(false); // array list section
     }
 
 }

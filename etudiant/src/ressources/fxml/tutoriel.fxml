@@ -70,7 +70,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="100.0" layoutY="46.0" prefHeight="367.0" prefWidth="600.0" text="Ici s'affiche un texte crypté. Il correspond au texte de la vidéo associée. A vous de le completer. " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <TextArea layoutX="100.0" layoutY="46.0" prefHeight="367.0" prefWidth="600.0" text="Ici s'affiche un texte crypté. Il correspond au texte de la vidéo associée. A vous de le completer. " wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                               </content>
