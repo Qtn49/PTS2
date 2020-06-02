@@ -74,6 +74,9 @@ public class PrincipalController {
     @FXML
     private VBox zoneTemps;
 
+    @FXML
+    private CheckBox limiteTemps;
+
     public void init () {
 //        DoubleProperty width = ressource.fitWidthProperty();
 //        DoubleProperty height = ressource.fitHeightProperty();
@@ -382,6 +385,17 @@ public class PrincipalController {
             }
         }
 
+    }
+
+    public void option (ActionEvent event) {
+
+        CheckBox checkBox = (CheckBox) event.getSource();
+
+        if (checkBox == limiteTemps) {
+
+            zoneTemps.setDisable(!zoneTemps.isDisabled());
+
+        }
     }
 
     public void ajouterMot (Event event) {
