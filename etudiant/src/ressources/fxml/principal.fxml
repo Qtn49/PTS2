@@ -127,7 +127,7 @@
                      <children>
                         <Label prefHeight="17.0" prefWidth="72.0" text="Consigne :" />
                         <TextArea prefHeight="162.0" prefWidth="356.0" />
-                        <SplitPane dividerPositions="0.8542713567839196" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+                        <SplitPane fx:id="SP1" dividerPositions="0.8542713567839196" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                           <items>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                  <children>
@@ -146,7 +146,6 @@
                                     <Button mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/boutons.css" />
                                     <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/boutons.css" />
                                     <ScrollBar fx:id="defilerLecture" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS" />
-                                    <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/boutons.css" />
                                  </children>
                                  <padding>
                                     <Insets left="15.0" right="10.0" />
