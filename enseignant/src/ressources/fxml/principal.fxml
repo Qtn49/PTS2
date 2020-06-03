@@ -28,8 +28,8 @@
             <MenuItem mnemonicParsing="false" text="Nouveau" />
             <MenuItem mnemonicParsing="false" text="Ouvrir" />
                   <MenuItem mnemonicParsing="false" onAction="#importer" text="Importer une ressource..." />
-            <MenuItem disable="true" mnemonicParsing="false" text="Sauvegarder " />
-                <MenuItem mnemonicParsing="false" text="Sauvegarder sous..." />
+            <MenuItem fx:id="save1" disable="true" mnemonicParsing="false" onAction="#zipper" text="Sauvegarder " />
+                <MenuItem fx:id="save2" mnemonicParsing="false" text="Sauvegarder sous..." />
             <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
           </items>
         </Menu>

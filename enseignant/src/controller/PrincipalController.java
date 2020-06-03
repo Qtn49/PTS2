@@ -72,6 +72,9 @@ public class PrincipalController {
 
     @FXML
     private VBox zoneTemps;
+    
+    @FXML
+    private MenuItem save1;
 
     public void init () {
 //        DoubleProperty width = ressource.fitWidthProperty();
@@ -251,10 +254,21 @@ public class PrincipalController {
 		
 		
 	}
+	
+	@FXML
+	public void zipper() {
+		
+	}
 
 	@FXML
-	public void part() {
-		Platform.exit();
+	public void part(Event event) {
+		if (event instanceof KeyEvent) {
+			 if (((KeyEvent) event).getCode() == KeyCode.ENTER)
+				 Platform.exit();
+		} else if (event instanceof ActionEvent) {
+			Platform.exit();
+		}
+		
 	}
 	
 	@FXML

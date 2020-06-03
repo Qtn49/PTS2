@@ -23,6 +23,8 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -48,17 +50,17 @@ public class PrincipalController {
 
 	@FXML
 	private Button backButton;
-	
+
 	private Stage stage;
-	
+
 	@FXML
 	private MediaView ressource;
-	
+
 	@FXML
 	private ScrollBar defilerLecture;
 	@FXML
 	private ToggleButton playButton, pauseButton;
-	
+
 	@FXML
 	public void quitter (Event event) {
 		Stage stage = new Stage();
@@ -70,7 +72,7 @@ public class PrincipalController {
 		}
 		stage.show();
 	}
-	
+
 	@FXML
 	public void solution (Event event) {
 		Stage stage = new Stage();
@@ -83,7 +85,7 @@ public class PrincipalController {
 		}
 		stage.show();
 	}
-	
+
 	@FXML
 
 	public void goback(ActionEvent event) {
@@ -94,10 +96,15 @@ public class PrincipalController {
 
 		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 	}
-	
+
 	@FXML
-	public void part (MouseEvent event) {
-		Platform.exit();
+	public void part (Event event) {
+		if (event instanceof KeyEvent) {
+			if (((KeyEvent) event).getCode() == KeyCode.ENTER)
+				Platform.exit();
+		} else if (event instanceof ActionEvent) {
+			Platform.exit();
+		}
 	}
 
 	public Stage getStage() {
@@ -106,9 +113,9 @@ public class PrincipalController {
 
 	public void setStage(Stage primaryStage) { 
 		stage = primaryStage;
-		
+
 	}
-	
+
 	public void ouvrir (ActionEvent event) throws IOException {
 
 		FileChooser chooser = new FileChooser();
@@ -132,90 +139,90 @@ public class PrincipalController {
 
 	@FXML
 	public void play (ActionEvent event) {
-	
+
 		if (ressource.getMediaPlayer().getStatus() == Status.PLAYING) {
 			playButton.setSelected(true);
 			return;
 		}
-		
+
 		pauseButton.setSelected(false);
 		ressource.getMediaPlayer().play();
-		
+
 	}
-	
+
 	public void init() {
-		
+
 		File file = new File("src/ressources/videos/angele.mp4");
-		
+
 		defilerLecture.valueProperty().addListener((observable, oldValue, newValue) -> deplacerCurseur(observable, oldValue, newValue));
-		
+
 		MediaPlayer media = new MediaPlayer(new Media(file.toURI().toString()));
-		
+
 		media.currentTimeProperty().addListener((observable, oldValue, newValue) -> updateCurseur(observable, oldValue, newValue));
-		
+
 		ressource.setFitWidth(((VBox) ressource.getParent()).getWidth());
 		ressource.setFitHeight(((VBox) ressource.getParent()).getHeight());
-		
+
 		ressource.setMediaPlayer(media);
-		
+
 	}
 
 	@FXML
 	private void pause (ActionEvent event) {
 		MediaPlayer player = ressource.getMediaPlayer();
-		
+
 		if (player.getStatus() == Status.PAUSED) {
 			playButton.setSelected(true);
 			return;
 		}
-		
+
 		playButton.setSelected(false);
-		
+
 		player.pause();
 	}
-	
+
 	private void updateCurseur(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
 
 		MediaPlayer player = ressource.getMediaPlayer();
-		
+
 		int curseur = (int) (Math.floor(newValue.toSeconds()) * 100 / Math.floor(player.getTotalDuration().toSeconds()));
-		
+
 		defilerLecture.setValue(curseur);
-		
+
 	}
-	
+
 	public void deplacerCurseur (ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-        
+
 		double durationTotal = ressource.getMediaPlayer().getTotalDuration().toSeconds();
 		double curseur = defilerLecture.getValue() * durationTotal / 100;
-		
+
 		ressource.getMediaPlayer().seek(Duration.seconds(curseur));
-		
-    }
-	
+
+	}
+
 	public void mute() {
-		
+
 		MediaPlayer player = ressource.getMediaPlayer();
-		
+
 		player.setVolume(player.getVolume() * -1 + 1);
 	}
-	
+
 	public void avancer() {
-		
+
 		MediaPlayer player = ressource.getMediaPlayer();
 		double curseur = player.getCurrentTime().toSeconds() + 5;
-		
+
 		player.seek(Duration.seconds(curseur));
 	}
-	
+
 	public void reculer() {
-		
+
 		MediaPlayer player = ressource.getMediaPlayer();
 		double curseur = player.getCurrentTime().toSeconds() - 5;
-		
+
 		player.seek(Duration.seconds(curseur));
 	}
-	
+
 	@FXML
 	public void tutoriel() {
 		Stage stage = new Stage();
@@ -228,5 +235,5 @@ public class PrincipalController {
 		}
 		stage.show();
 	}
-	
+
 }
