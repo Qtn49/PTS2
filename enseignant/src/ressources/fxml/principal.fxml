@@ -141,7 +141,7 @@
                                     <HBox alignment="CENTER_LEFT" spacing="400.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <CheckBox mnemonicParsing="false" text="Mode apprentissage" />
-                                          <CheckBox mnemonicParsing="false" text="Limite de temps" />
+                                          <CheckBox fx:id="limiteTemps" mnemonicParsing="false" onAction="#option" text="Limite de temps" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
@@ -165,7 +165,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="zoneTemps" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0" HBox.hgrow="ALWAYS">
+                  <VBox fx:id="zoneTemps" alignment="CENTER_LEFT" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox alignment="CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
                            <children>

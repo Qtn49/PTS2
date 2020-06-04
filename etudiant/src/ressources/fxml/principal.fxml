@@ -10,15 +10,14 @@
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
@@ -64,18 +63,7 @@
                <children>
                   <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
                      <children>
-                        <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-                          <tabs>
-                            <Tab text="section 1">
-                              <content>
-                                    <VBox>
-                                       <children>
-                                          <TextArea VBox.vgrow="ALWAYS" />
-                                       </children>
-                                    </VBox>
-                              </content>
-                            </Tab>
-                          </tabs>
+                        <TabPane fx:id="sections" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -108,8 +96,8 @@
                               </Label>
                               <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="248.0" />
-                                    <Button fx:id="BS1" mnemonicParsing="false" onMouseClicked="#solution" text="Solution" />
+                                    <ListView fx:id="aide" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="248.0" />
+                                    <Button fx:id="BS1" mnemonicParsing="false" onAction="#solution" text="Solution" />
                                  </children>
                               </HBox>
                            </children>
@@ -126,19 +114,20 @@
                   <VBox spacing="10.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="72.0" text="Consigne :" />
-                        <TextArea prefHeight="162.0" prefWidth="356.0" />
+                        <TextArea prefHeight="162.0" prefWidth="356.0" /> 
                         <SplitPane fx:id="SP1" dividerPositions="0.8542713567839196" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+                        <TextArea fx:id="consigne" prefHeight="162.0" prefWidth="356.0" />
                           <items>
-                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                              <AnchorPane>
                                  <children>
-                                    <MediaView fx:id="ressource" layoutY="194.0" nodeOrientation="INHERIT" />
-                                    <ImageView fx:id="iconRessource" fitHeight="195.0" layoutX="185.0" pickOnBounds="true" preserveRatio="true">
+                                    <MediaView fx:id="ressource" nodeOrientation="INHERIT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ImageView fx:id="iconRessource" fitHeight="195.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <image>
                                           <Image url="@../images/videoVide.png" />
                                        </image>
                                     </ImageView>
                                  </children>
-                              </Pane>
+                              </AnchorPane>
                               <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
                                  <children>
                                     <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/boutons.css" />
