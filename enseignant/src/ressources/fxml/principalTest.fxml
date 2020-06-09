@@ -173,7 +173,6 @@
                               <Spinner fx:id="TT" />
                            </children>
                         </HBox>
-                        <Spinner fx:id="Total" />
                         <Label fx:id="T" text="Total : " />
                      </children>
                   </VBox>

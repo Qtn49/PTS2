@@ -1,11 +1,16 @@
 package model;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Exercice implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Section> sections;
 	private LinkedList<String> aide;
 	private String consigne;

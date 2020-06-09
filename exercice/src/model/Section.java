@@ -5,6 +5,10 @@ import java.io.Serializable;
 public class Section implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int temps;
 	String solution;
 	String texteOccultee;
