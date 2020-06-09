@@ -18,7 +18,7 @@ public class Main extends Application {
 //			primaryStage.getIcons().add(new Image(""));
 			primaryStage.show();
 			PrincipalController controller = loader.getController();
-			controller.setStage(primaryStage);
+			PrincipalController.setStage(primaryStage);
 
 			primaryStage.setOnCloseRequest(event -> {
 				event.consume();

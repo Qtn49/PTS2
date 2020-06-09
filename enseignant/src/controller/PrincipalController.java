@@ -1,8 +1,6 @@
 package controller;
 
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -22,12 +20,18 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class PrincipalController {
 
     private File exo;
     private Stage stage;
+    private File ressourceFile;
+
     @FXML
     private MediaView ressource;
 
@@ -37,6 +41,9 @@ public class PrincipalController {
 	
 	@FXML
 	private MenuItem MQ2;
+
+	@FXML
+	private TabPane sections;
 
 	@FXML
 	private Button BQ1;
@@ -151,10 +158,10 @@ public class PrincipalController {
             Dragboard dragboard = ((DragEvent) event).getDragboard();
             if (dragboard.hasFiles()) {
 
-                File file = dragboard.getFiles().get(0);
+                ressourceFile = dragboard.getFiles().get(0);
 
-                if (file.isFile() && file.getName().matches("^.*\\.(mp4|mp3|wav|mkv)$"))
-                    setMedia(file);
+                if (ressourceFile.isFile() && ressourceFile.getName().matches("^.*\\.(mp4|mp3|wav|mkv)$"))
+                    setMedia(ressourceFile);
 
             }
 
@@ -164,9 +171,9 @@ public class PrincipalController {
             FileChooser chooser = new FileChooser();
             chooser.setTitle("Choisir une ressource");
             chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Ressource audio ou vidéo (*.mp4, *.mp3, *.wav)", "*.mp3", "*.mp4", "*.wav"));
-            File file = chooser.showOpenDialog(stage);
-            if (file != null) {
-                setMedia(file);
+            ressourceFile = chooser.showOpenDialog(stage);
+            if (ressourceFile != null) {
+                setMedia(ressourceFile);
             }else {
                 try {
                     Stage stage = new Stage();
@@ -214,8 +221,65 @@ public class PrincipalController {
 
     }
 
-	
-	
+    private boolean checkExo () {
+
+        if (ressource.getMediaPlayer() == null)
+            return false;
+
+        for (Tab tab : sections.getTabs()) {
+            if (tab.getText().equals("+"))
+                continue;
+            TextArea area = (TextArea) ((VBox) tab.getContent()).getChildren().get(0);
+            if (area.getText().equals(""))
+                return false;
+        }
+
+        return true;
+
+    }
+
+    public void sauvegarder () throws IOException {
+
+        if (!checkExo()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Il manque des informations");
+            alert.show();
+            return;
+        }
+
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Sauvegarder l'exercice");
+//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.exo)", "*.exo");
+//        chooser.getExtensionFilters().add(extFilter);
+        File file = chooser.showSaveDialog(stage);
+
+        if (file == null)
+            return;
+
+        String nomExo = file.getName();
+
+        if (!nomExo.endsWith(".exo")) {
+            nomExo = nomExo.replaceAll("(\\..*)?$", ".exo");
+        }
+
+        System.out.println(nomExo);
+
+        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(nomExo));
+        FileInputStream fileInputStream = new FileInputStream(ressourceFile);
+        ZipEntry ressource = new ZipEntry(ressourceFile.getName());
+
+        zipOutputStream.putNextEntry(ressource);
+
+        byte[] bytes = new byte[1024];
+        int length;
+
+        while ((length = fileInputStream.read(bytes)) >= 0) {
+            zipOutputStream.write(bytes, 0, length);
+        }
+
+        zipOutputStream.close();
+        fileInputStream.close();
+
+    }
 	
 	@FXML
 	public void supprimer (Event event) {

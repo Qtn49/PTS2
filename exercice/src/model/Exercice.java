@@ -3,6 +3,14 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
 
 public class Exercice implements Serializable {
 
@@ -14,9 +22,13 @@ public class Exercice implements Serializable {
 	private boolean affichageSolution;
 	private boolean motIncomplet;
 	private boolean sensibiliteCasse;
+	private int temps;
+	private int tempsTotal;
+	private boolean fini;
+	private Section sectionActuelle;
+	
 
 	//constructeurs
-
 
 	public Exercice(ArrayList<Section> sections, LinkedList<String> aide, String consigne, boolean modeEvaluation, boolean limiteTps) {
 		this.sections = sections;
@@ -24,6 +36,63 @@ public class Exercice implements Serializable {
 		this.consigne = consigne;
 		this.modeEvaluation = modeEvaluation;
 		this.limiteTps = limiteTps;
+		
+		for (Section section : sections) {
+			
+			tempsTotal += section.getTemps();
+			
+		}
+		
+	}
+
+	public void demarrerChrono (Section section) {
+
+		sectionActuelle = section;
+		
+		Runnable runnable = new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				while (temps < tempsTotal * 60) {
+				
+					System.out.println("exercice : " + temps++);
+					if (sectionActuelle.isFini()) {
+						sectionActuelle = sections.get(sections.indexOf(sectionActuelle) + 1 % sections.size());
+						System.out.println("fini !!!");
+					}else
+						sectionActuelle.demarrerChrono();
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					
+				}
+				
+				setFini(true);
+				
+			}
+		};
+		
+//		if ()
+		
+		new Thread(runnable).start();
+
+	}
+	
+	public void changerChronoSection (Section section) {
+		
+		if (sectionActuelle != null) {
+			
+			sectionActuelle.pause();
+			section.demarrerChrono();
+			
+		}
+		
 	}
 
 	public void addSection (int index, Section section) {
@@ -92,6 +161,22 @@ public class Exercice implements Serializable {
 
 	public void setSensibiliteCasse(boolean sensibiliteCasse) {
 		this.sensibiliteCasse = sensibiliteCasse;
+	}
+
+	public boolean isFini() {
+		return fini;
+	}
+
+	public void setFini(boolean fini) {
+		this.fini = fini;
+	}
+
+	public Section getSectionActuelle() {
+		return sectionActuelle;
+	}
+
+	public void setSectionActuelle(Section sectionActuelle) {
+		this.sectionActuelle = sectionActuelle;
 	}
 
 	@java.lang.Override

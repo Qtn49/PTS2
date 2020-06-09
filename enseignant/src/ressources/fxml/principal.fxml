@@ -28,8 +28,8 @@
             <MenuItem mnemonicParsing="false" text="Nouveau" />
             <MenuItem mnemonicParsing="false" text="Ouvrir" />
                   <MenuItem mnemonicParsing="false" onAction="#importer" text="Importer une ressource..." />
-            <MenuItem disable="true" mnemonicParsing="false" text="Sauvegarder " />
-                <MenuItem mnemonicParsing="false" text="Sauvegarder sous..." />
+            <MenuItem disable="true" mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder " />
+                <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder sous..." />
             <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
           </items>
         </Menu>
@@ -47,7 +47,7 @@
                   <VBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Texte" />
-                        <TabPane minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" VBox.vgrow="ALWAYS">
+                        <TabPane fx:id="sections" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" VBox.vgrow="ALWAYS">
                           <tabs>
                             <Tab onCloseRequest="#fermer" text="section 1">
                               <content>

@@ -4,12 +4,16 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -50,7 +54,10 @@ public class PrincipalController {
 	@FXML
 	private Button backButton;
 	
-	private Stage stage;
+	private static Stage stage;
+
+	@FXML
+	private TextField proposition;
 	
 	@FXML
 	private MediaView ressource;
@@ -75,12 +82,14 @@ public class PrincipalController {
 
 	public void setExercice(Exercice exercice) {
 
+		this.exercice = exercice;
+
 		for (int i = 1; i <= exercice.nbSections(); i++) {
 
 			Tab tab = null;
 			try {
 				tab = FXMLLoader.load(getClass().getResource("/ressources/fxml/tab.fxml"));
-				tab.setText(tab.getText() + " " + 1);
+				tab.setText(tab.getText() + " " + i);
 				VBox vBox = (VBox) tab.getContent();
 				((TextArea) vBox.getChildren().get(0)).setText(exercice.getSection(i).getTexteOccultee());
 			} catch (IOException e) {
@@ -118,7 +127,17 @@ public class PrincipalController {
 		Stage stage = new Stage();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/alerteSolution.fxml"));
 		try {
-			stage.setScene(new Scene(loader.load()));
+			VBox vBox = loader.load();
+			HBox hBox = (HBox) vBox.getChildren().get(1);
+			Button button = (Button) hBox.getChildren().get(1);
+			button.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					stage.close();
+					montrerSolution(null);
+				}
+			});
+			stage.setScene(new Scene(vBox));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,20 +145,17 @@ public class PrincipalController {
 		stage.show();
 	}
 
+	@FXML
 	public void montrerSolution (ActionEvent event) {
 
-		((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+		for (int i = 1; i <= sections.getTabs().size(); i++) {
+			VBox vBox = (VBox) sections.getTabs().get(i - 1).getContent();
 
-		System.out.println(sections.getTabs());
+			TextArea area = (TextArea) vBox.getChildren().get(0);
 
-//		for (int i = 0; i < sections.getTabs().size(); i++) {
-//			VBox vBox = (VBox) sections.getTabs().get(i).getContent();
-//
-//			TextArea area = (TextArea) vBox.getChildren().get(0);
-//
-//			area.setText(exercice.getSection(i + 1).getSolution());
-//
-//		}
+			area.setText(exercice.getSection(i).getSolution());
+
+		}
 
 	}
 	
@@ -155,15 +171,15 @@ public class PrincipalController {
 	}
 	
 	@FXML
-	public void part (MouseEvent event) {
+	public void part (Event event) {
 		Platform.exit();
 	}
 
-	public Stage getStage() {
+	public static Stage getStage() {
 		return stage;
 	}
 
-	public void setStage(Stage primaryStage) { 
+	public static void setStage(Stage primaryStage) {
 		stage = primaryStage;
 		
 	}
@@ -226,6 +242,20 @@ public class PrincipalController {
 		ressource.getMediaPlayer().play();
 		
 	}
+
+	public void valider (Event event) {
+
+		if (event instanceof KeyEvent) {
+			if (((KeyEvent) event).getCode() != KeyCode.ENTER) {
+				return;
+			}
+		}
+
+		System.out.println(proposition.getText());
+
+		proposition.setText("");
+
+	}
 	
 	public void init() {
 		
@@ -252,7 +282,7 @@ public class PrincipalController {
 //		ressource.setFitHeight(((VBox) ressource.getParent()).getHeight());
 
 		ressource.setMediaPlayer(mediaPlayer);
-		
+
 	}
 
 	@FXML

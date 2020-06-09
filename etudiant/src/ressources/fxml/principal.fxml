@@ -8,8 +8,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -61,7 +61,7 @@
          <children>
             <VBox HBox.hgrow="ALWAYS">
                <children>
-                  <VBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
                      <children>
                         <TabPane fx:id="sections" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                            <padding>
@@ -72,7 +72,7 @@
                   </VBox>
                   <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox spacing="10.0">
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="Proposition">
                                  <font>
@@ -81,8 +81,8 @@
                               </Label>
                               <HBox spacing="20.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TextField />
-                                    <Button mnemonicParsing="false" text="Valider" />
+                                    <TextField fx:id="proposition" onKeyReleased="#valider" HBox.hgrow="ALWAYS" />
+                                    <Button mnemonicParsing="false" onAction="#valider" text="Valider" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                            </children>
@@ -115,9 +115,9 @@
                      <children>
                         <Label prefHeight="17.0" prefWidth="72.0" text="Consigne :" />
                         <TextArea fx:id="consigne" prefHeight="162.0" prefWidth="356.0" />
-                        <SplitPane dividerPositions="0.8542713567839196" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" VBox.vgrow="ALWAYS">
-                          <items>
-                              <AnchorPane>
+                        <VBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
                                     <MediaView fx:id="ressource" nodeOrientation="INHERIT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <ImageView fx:id="iconRessource" fitHeight="195.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -127,21 +127,22 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0">
+                              <Separator maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" VBox.vgrow="ALWAYS" />
+                              <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/boutons.css" />
-                                    <ToggleButton fx:id="pauseButton" mnemonicParsing="false" onAction="#pause" selected="true" styleClass="pause" stylesheets="@../css/boutons.css" />
-                                    <Button mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/boutons.css" />
-                                    <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/boutons.css" />
-                                    <ScrollBar fx:id="defilerLecture" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS" />
+                                    <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
+                                    <ToggleButton fx:id="pauseButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#pause" selected="true" styleClass="pause" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
+                                    <Button maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
+                                    <Button layoutX="506.0" layoutY="24.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
+                                    <ScrollBar fx:id="defilerLecture" maxHeight="1.7976931348623157E308" minHeight="-Infinity" HBox.hgrow="ALWAYS" />
                                     <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/boutons.css" />
                                  </children>
                                  <padding>
                                     <Insets left="15.0" right="10.0" />
                                  </padding>
                               </HBox>
-                          </items>
-                        </SplitPane>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>

@@ -19,8 +19,9 @@ public class Test {
         aide.add("Un petit mot");
 
         sections.add(section);
+        sections.add(new Section(20, "yo yo une deuxième section (d'assault) ! haha lol"));
 
-        Exercice exercice = new Exercice(sections, "blc", aide, "Tu dois trouver tout seul haha !", false, true);
+        Exercice exercice = new Exercice(sections, aide, "Tu dois trouver tout seul haha !", false, true);
 
         ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("test.o"));
         outputStream.writeObject(exercice);
