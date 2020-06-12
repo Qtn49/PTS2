@@ -1,6 +1,6 @@
 package application;
 
-import controller.PrincipalController;
+import controller.AccueilController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,8 +17,8 @@ public class Main extends Application {
 //			primaryStage.setResizable(false);
 //			primaryStage.getIcons().add(new Image(""));
 			primaryStage.show();
-			PrincipalController controller = loader.getController();
-			PrincipalController.setStage(primaryStage);
+			AccueilController controller = loader.getController();
+			controller.setStage(primaryStage);
 
 			primaryStage.setOnCloseRequest(event -> {
 				event.consume();

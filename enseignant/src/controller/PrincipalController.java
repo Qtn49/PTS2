@@ -24,6 +24,7 @@ import javafx.util.Duration;
 import model.Exercice;
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -286,7 +287,7 @@ public class PrincipalController {
 
     }
 
-    public void sauvegarder () throws IOException {
+    public void sauvegarder () {
 
         if (!checkExo()) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Il manque des informations");
@@ -294,9 +295,7 @@ public class PrincipalController {
             return;
         }
 
-        exercice = creerExercice();
 
-        serialize(exercice);
 
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Sauvegarder l'exercice");
@@ -306,11 +305,11 @@ public class PrincipalController {
         if (file == null)
             return;
 
-        String nomExo = file.getName();
+        exercice = creerExercice();
 
-//        if (!nomExo.endsWith(".exo")) {
-//            nomExo = nomExo.replaceAll("(\\..*)?$", ".exo");
-//        }
+        serialize(exercice);
+
+        String nomExo = file.getName();
 
         createZip(nomExo);
 
@@ -346,8 +345,8 @@ public class PrincipalController {
             zipOutputStream.close();
             fileInputStream.close();
 
-        }catch (Exception ignored) {
-
+        }catch (Exception exception) {
+            exception.printStackTrace();
         }
 
     }
@@ -358,30 +357,28 @@ public class PrincipalController {
 
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("exo.o"));
             outputStream.writeObject(exercice);
+
+            System.out.println(outputStream);
+
             outputStream.close();
 
-        }catch (Exception ignored) {
-
+        }catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
     private Exercice creerExercice () {
 
-        Exercice exercice = new Exercice(consigne.getText(), modeEval.isSelected(), limiteTemps.isSelected());
+        Exercice exercice = new Exercice(consigne.getText(), ressourceFile.getName(), modeEval.isSelected(), limiteTemps.isSelected());
 
         for (int i = 0; i < 1; i++) {
-
-            System.out.println(sections.getTabs().get(i).getText());
 
             if (sections.getTabs().get(i).getText().equals("+"))
                 continue;
 
             int temps = (int) ((Spinner) ((HBox) zoneTemps.getChildren().get(i)).getChildren().get(1)).getValue();
             String texte = ((TextArea) ((VBox) sections.getTabs().get(i).getContent()).getChildren().get(0)).getText();
-
-            System.out.println(temps);
-            System.out.println(texte);
 
             exercice.ajouteSection(temps, texte);
 
@@ -396,8 +393,6 @@ public class PrincipalController {
         for (String texte : aideMots.getItems()) {
             exercice.ajouteAide(texte);
         }
-
-        System.out.println(exercice);
 
         return exercice;
     }
@@ -611,9 +606,6 @@ public class PrincipalController {
     }
 
     public void playPause(ActionEvent event) {
-
-        if (!ready)
-            return;
         
         if (ressource.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING)
             ressource.getMediaPlayer().pause();
@@ -622,5 +614,34 @@ public class PrincipalController {
 
     }
 
+    public void importerTexte(ActionEvent event) {
+
+        FileChooser chooser = new FileChooser();
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("fichier texte (*.txt)", "*.txt"));
+        File file = chooser.showOpenDialog(stage);
+
+        if (file == null)
+            return;
+
+        Tab tab = sections.getSelectionModel().getSelectedItem();
+
+        StringBuilder texte = new StringBuilder();
+
+        try {
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                texte.append(scanner.nextLine()).append("\n");
+            }
+
+            scanner.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ((TextArea) ((VBox) tab.getContent()).getChildren().get(0)).setText(texte.toString());
+
+    }
 }
 

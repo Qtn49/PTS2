@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,21 +20,18 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Exercice;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class PrincipalController {
+public class PrincipalController extends AccueilController implements Initializable {
 
 	private Media media;
 
@@ -110,16 +108,9 @@ public class PrincipalController {
 
 	}
 
-	@FXML
-	public void quitter (Event event) {
-		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/quitter.fxml"));
-		try {
-			stage.setScene(new Scene(loader.load()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		stage.show();
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
 	}
 	
 	@FXML
@@ -175,58 +166,30 @@ public class PrincipalController {
 		Platform.exit();
 	}
 
-	public static Stage getStage() {
+	public Stage getStage() {
 		return stage;
 	}
 
-	public static void setStage(Stage primaryStage) {
+	public void setStage(Stage primaryStage) {
 		stage = primaryStage;
 		
 	}
-	
-	public void ouvrir (ActionEvent event) throws IOException, ClassNotFoundException, URISyntaxException {
 
-		FileChooser chooser = new FileChooser();
-		chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("exercice (*.exo)", "*.exo"));
-		File file = chooser.showOpenDialog(stage);
-		ZipFile zipFile = new ZipFile(file);
+	public void ouvrirExo(URL url) throws IOException, ClassNotFoundException, URISyntaxException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/principal.fxml"));
-		stage.setScene(new Scene(loader.load()));
-		PrincipalController controller = loader.getController();
+		URL exo = new URL("jar:" + url + "!/exo.o");
 
-		controller.ouvrirExo(zipFile);
+		InputStream is = exo.openStream();
+		ObjectInputStream stream = new ObjectInputStream(is);
+		Exercice exercice = (Exercice) stream.readObject();
 
-		controller.init();
+		setExercice(exercice);
 
-	}
+		URL ressource = new URL("jar:" + url + "!/" + exercice.getNomRessource());
 
-	private void ouvrirExo (ZipFile zipFile) throws IOException, ClassNotFoundException, URISyntaxException {
+		media = new Media(ressource.toURI().toString());
 
-		Enumeration<? extends ZipEntry> entries = zipFile.entries();
-
-		while (entries.hasMoreElements()) {
-			ZipEntry entry = entries.nextElement();
-
-			if (entry.getName().matches(".*\\.o")) {
-
-
-				InputStream stream = zipFile.getInputStream(entry);
-				ObjectInputStream stream1 = new ObjectInputStream(stream);
-				Exercice exercice = (Exercice) stream1.readObject();
-
-				setExercice(exercice);
-
-
-
-			}else if (entry.getName().matches(".*\\.(mp4|mp3|wav)")) {
-//				InputStream stream = zipFile.getInputStream(entry);
-
-//				media = new Media(getClass().getResource("/ressources/videos/betterNow.mp4").toURI().toString());
-			}
-		}
-
-		zipFile.close();
+		init();
 
 	}
 
@@ -256,19 +219,19 @@ public class PrincipalController {
 		proposition.setText("");
 
 	}
-	
+
 	public void init() {
-		
+
 //		File file = new File("src/ressources/videos/angele.mp4");
-		
+
 		defilerLecture.valueProperty().addListener(this::deplacerCurseur);
-		
+
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		
+
 		mediaPlayer.setOnReady(mediaPlayer::play);
 
 		System.out.println(sections.getTabs());
-		
+
 		mediaPlayer.currentTimeProperty().addListener(this::updateCurseur);
 
 //		ressource.setFitWidth(((VBox) ressource.getParent()).getWidth());

@@ -25,7 +25,7 @@
                   </Button>
                </left>
                <right>
-                  <Button fx:id="QB1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#part" text="Quitter" translateX="-30.0" BorderPane.alignment="CENTER">
+                  <Button fx:id="QB1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#part" text="Quitter" translateX="-30.0" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="15.0" />
                      </font>

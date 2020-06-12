@@ -18,13 +18,14 @@ public class Exercice implements Serializable {
 	private int tempsTotal;
 	private boolean fini;
 	private Section sectionActuelle;
-	
+	private final String nomRessource;
 
 	//constructeurs
 
-	public Exercice(String consigne, boolean modeEvaluation, boolean limiteTps) {
+	public Exercice(String consigne, String nomRessource, boolean modeEvaluation, boolean limiteTps) {
 		sections = new ArrayList<>();
 		aide = new LinkedList<>();
+		this.nomRessource = nomRessource;
 		this.consigne = consigne;
 		this.modeEvaluation = modeEvaluation;
 		this.limiteTps = limiteTps;
@@ -92,6 +93,10 @@ public class Exercice implements Serializable {
 			
 		}
 		
+	}
+
+	public String getNomRessource() {
+		return nomRessource;
 	}
 
 	public void addSection (int index, Section section) {
@@ -178,8 +183,8 @@ public class Exercice implements Serializable {
 		this.sectionActuelle = sectionActuelle;
 	}
 
-	@java.lang.Override
-	public java.lang.String toString() {
+	@Override
+	public String toString() {
 		return "Exercice{" +
 				"sections=" + sections +
 				", aide=" + aide +

@@ -31,7 +31,7 @@
           <items>
             <MenuItem mnemonicParsing="false" text="Nouveau" />
             <MenuItem mnemonicParsing="false" text="Ouvrir" />
-                  <MenuItem mnemonicParsing="false" onAction="#importer" text="Importer une ressource..." />
+                  <MenuItem mnemonicParsing="false" onAction="#importerTexte" text="Importer un texte" />
             <MenuItem disable="true" mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder " />
                 <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder sous..." />
             <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
@@ -116,7 +116,7 @@
                               <Button fx:id="supprimer" disable="true" layoutX="212.0" layoutY="198.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
                               <VBox fx:id="infosRessource" alignment="TOP_CENTER" layoutX="435.0" layoutY="12.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0" visible="false">
                                  <children>
-                                    <ToggleButton id="playPause" mnemonicParsing="false" onAction="#playPause" />
+                                    <ToggleButton id="playPause" mnemonicParsing="false" onAction="#playPause" selected="true" />
                                     <Text fx:id="temps" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00 / 3:40" />
                                  </children>
                               </VBox>
