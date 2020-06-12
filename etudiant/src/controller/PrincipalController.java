@@ -265,14 +265,7 @@ public class PrincipalController {
 		
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		
-		mediaPlayer.setOnReady(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				mediaPlayer.play();
-			}
-		});
+		mediaPlayer.setOnReady(mediaPlayer::play);
 
 		System.out.println(sections.getTabs());
 		

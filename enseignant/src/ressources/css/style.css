@@ -8,3 +8,13 @@
  .remove {
      -fx-opacity: 0;
  }
+
+ #playPause {
+
+     /*-fx-padding: 5px;*/
+     -fx-background-image: url('/ressources/images/iconPlayPause.png');
+     -fx-background-size: 15px;
+     -fx-background-repeat: no-repeat;
+     -fx-background-position: 30%;
+
+ }

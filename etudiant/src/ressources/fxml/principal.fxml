@@ -130,12 +130,12 @@
                               <Separator maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" VBox.vgrow="ALWAYS" />
                               <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
-                                    <ToggleButton fx:id="pauseButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#pause" selected="true" styleClass="pause" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
-                                    <Button maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
-                                    <Button layoutX="506.0" layoutY="24.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/boutons.css" HBox.hgrow="ALWAYS" />
+                                    <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/style.css" HBox.hgrow="ALWAYS" />
+                                    <ToggleButton fx:id="pauseButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#pause" selected="true" styleClass="pause" stylesheets="@../css/style.css" HBox.hgrow="ALWAYS" />
+                                    <Button maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/style.css" HBox.hgrow="ALWAYS" />
+                                    <Button layoutX="506.0" layoutY="24.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/style.css" HBox.hgrow="ALWAYS" />
                                     <ScrollBar fx:id="defilerLecture" maxHeight="1.7976931348623157E308" minHeight="-Infinity" HBox.hgrow="ALWAYS" />
-                                    <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/boutons.css" />
+                                    <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/style.css" />
                                  </children>
                                  <padding>
                                     <Insets left="15.0" right="10.0" />

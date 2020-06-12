@@ -134,13 +134,13 @@
                               </AnchorPane>
                               <HBox alignment="CENTER_LEFT" spacing="15.0">
                                  <children>
-                                    <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/boutons.css" />
-                                    <ToggleButton fx:id="PauseButton" mnemonicParsing="false" onAction="#pause" styleClass="pause" stylesheets="@../css/boutons.css" />
-                                    <Button mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/boutons.css" />
-                                    <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/boutons.css" />
+                                    <ToggleButton fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="play" stylesheets="@../css/style.css" />
+                                    <ToggleButton fx:id="PauseButton" mnemonicParsing="false" onAction="#pause" styleClass="pause" stylesheets="@../css/style.css" />
+                                    <Button mnemonicParsing="false" onAction="#reculer" styleClass="precedant" stylesheets="@../css/style.css" />
+                                    <Button layoutX="506.0" layoutY="24.0" mnemonicParsing="false" onAction="#avancer" styleClass="suivant" stylesheets="@../css/style.css" />
                                     <ScrollBar fx:id="defilerLecture" prefHeight="17.0" prefWidth="433.0" />
-                                    <ToggleButton mnemonicParsing="false" onAction="#mute" styleClass="soundOff" stylesheets="@../css/boutons.css" />
-                                    <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/boutons.css" />
+                                    <ToggleButton mnemonicParsing="false" onAction="#mute" styleClass="soundOff" stylesheets="@../css/style.css" />
+                                    <Button mnemonicParsing="false" styleClass="plein-ecran" stylesheets="@../css/style.css" />
                                  </children>
                                  <padding>
                                     <Insets left="15.0" />

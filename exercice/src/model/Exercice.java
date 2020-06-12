@@ -3,14 +3,6 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.util.Duration;
 
 public class Exercice implements Serializable {
 
@@ -30,18 +22,12 @@ public class Exercice implements Serializable {
 
 	//constructeurs
 
-	public Exercice(ArrayList<Section> sections, LinkedList<String> aide, String consigne, boolean modeEvaluation, boolean limiteTps) {
-		this.sections = sections;
-		this.aide = aide;
+	public Exercice(String consigne, boolean modeEvaluation, boolean limiteTps) {
+		sections = new ArrayList<>();
+		aide = new LinkedList<>();
 		this.consigne = consigne;
 		this.modeEvaluation = modeEvaluation;
 		this.limiteTps = limiteTps;
-		
-		for (Section section : sections) {
-			
-			tempsTotal += section.getTemps();
-			
-		}
 		
 	}
 
@@ -81,6 +67,19 @@ public class Exercice implements Serializable {
 //		if ()
 		
 		new Thread(runnable).start();
+
+	}
+
+	public void ajouteSection (int temps, String texte) {
+
+		tempsTotal += temps;
+		sections.add(new Section(temps, texte));
+
+	}
+
+	public void ajouteAide (String aide) {
+
+		this.aide.add(aide);
 
 	}
 	

@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -14,15 +15,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import model.Exercice;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -31,6 +32,7 @@ public class PrincipalController {
     private File exo;
     private Stage stage;
     private File ressourceFile;
+    private Exercice exercice;
 
     @FXML
     private MediaView ressource;
@@ -82,6 +84,25 @@ public class PrincipalController {
 
     @FXML
     private CheckBox limiteTemps;
+
+    @FXML
+    private Label labelRessource;
+
+    @FXML
+    private VBox infosRessource;
+
+    @FXML
+    private Text temps;
+
+    @FXML
+    private TextArea consigne;
+
+    @FXML
+    private CheckBox motIncomplet, solution, casse;
+
+    @FXML
+    private RadioButton modeEval;
+    private boolean ready;
 
     public void init () {
 //        DoubleProperty width = ressource.fitWidthProperty();
@@ -211,13 +232,40 @@ public class PrincipalController {
     }
 
     public void setMedia (File file) {
-        MediaPlayer player = new MediaPlayer(new Media(file.toURI().toString()));
-//        player.setAutoPlay(true);
-        player.setOnError(()->
-                System.out.println("media error"+player.getError().toString()));
+        Media media = new Media(file.toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+
+        player.setOnReady(() -> {
+            int minutes = (int) (player.getMedia().getDuration().toSeconds() / 60), secondes = (int) (player.getMedia().getDuration().toSeconds() % 60);
+
+            temps.setText(temps.getText().replaceAll("\\d{1,2}:\\d{1,2}$", String.format("%02d", minutes) + ":" + String.format("%02d", secondes)));
+
+            ready = true;
+
+        });
+
+        player.currentTimeProperty().addListener(this::updateTime);
+
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+
+        player.setOnError(()-> System.out.println("media error"+player.getError().toString()));
         ressource.setMediaPlayer(player);
 
+        infosRessource.setVisible(true);
+
+        labelRessource.setVisible(false);
+
         supprimer.setDisable(false);
+
+    }
+
+    private void updateTime(Observable observable, Duration oldValue, Duration newValue) {
+
+        MediaPlayer player = ressource.getMediaPlayer();
+
+        int minutes = (int) (newValue.toSeconds() / 60), secondes = (int) (newValue.toSeconds() % 60);
+
+        temps.setText(temps.getText().replaceAll("^\\d{1,2}:\\d{1,2}", String.format("%02d", minutes) + ":" + String.format("%02d", secondes)));
 
     }
 
@@ -246,10 +294,13 @@ public class PrincipalController {
             return;
         }
 
+        exercice = creerExercice();
+
+        serialize(exercice);
+
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Sauvegarder l'exercice");
-//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.exo)", "*.exo");
-//        chooser.getExtensionFilters().add(extFilter);
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Exo files (*.exo)", "*.exo"));
         File file = chooser.showSaveDialog(stage);
 
         if (file == null)
@@ -257,42 +308,122 @@ public class PrincipalController {
 
         String nomExo = file.getName();
 
-        if (!nomExo.endsWith(".exo")) {
-            nomExo = nomExo.replaceAll("(\\..*)?$", ".exo");
-        }
+//        if (!nomExo.endsWith(".exo")) {
+//            nomExo = nomExo.replaceAll("(\\..*)?$", ".exo");
+//        }
 
-        System.out.println(nomExo);
+        createZip(nomExo);
 
-        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(nomExo));
-        FileInputStream fileInputStream = new FileInputStream(ressourceFile);
-        ZipEntry ressource = new ZipEntry(ressourceFile.getName());
-
-        zipOutputStream.putNextEntry(ressource);
-
-        byte[] bytes = new byte[1024];
-        int length;
-
-        while ((length = fileInputStream.read(bytes)) >= 0) {
-            zipOutputStream.write(bytes, 0, length);
-        }
-
-        zipOutputStream.close();
-        fileInputStream.close();
+        new File("exo.o").delete();
 
     }
-	
-	@FXML
-	public void supprimer (Event event) {
+
+    private void createZip(String nomExo) {
+
+        try {
+            ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(nomExo));
+            FileInputStream fileInputStream = new FileInputStream(ressourceFile);
+            ZipEntry ressource = new ZipEntry(ressourceFile.getName());
+
+            zipOutputStream.putNextEntry(ressource);
+
+            byte[] bytes = new byte[1024];
+            int length;
+
+            while ((length = fileInputStream.read(bytes)) >= 0) {
+                zipOutputStream.write(bytes, 0, length);
+            }
+
+            fileInputStream = new FileInputStream("exo.o");
+            ZipEntry exo = new ZipEntry("exo.o");
+
+            zipOutputStream.putNextEntry(exo);
+
+            while ((length = fileInputStream.read(bytes)) >= 0) {
+                zipOutputStream.write(bytes, 0, length);
+            }
+
+            zipOutputStream.close();
+            fileInputStream.close();
+
+        }catch (Exception ignored) {
+
+        }
+
+    }
+
+    private void serialize(Exercice exercice) {
+
+        try {
+
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("exo.o"));
+            outputStream.writeObject(exercice);
+            outputStream.close();
+
+        }catch (Exception ignored) {
+
+        }
+
+    }
+
+    private Exercice creerExercice () {
+
+        Exercice exercice = new Exercice(consigne.getText(), modeEval.isSelected(), limiteTemps.isSelected());
+
+        for (int i = 0; i < 1; i++) {
+
+            System.out.println(sections.getTabs().get(i).getText());
+
+            if (sections.getTabs().get(i).getText().equals("+"))
+                continue;
+
+            int temps = (int) ((Spinner) ((HBox) zoneTemps.getChildren().get(i)).getChildren().get(1)).getValue();
+            String texte = ((TextArea) ((VBox) sections.getTabs().get(i).getContent()).getChildren().get(0)).getText();
+
+            System.out.println(temps);
+            System.out.println(texte);
+
+            exercice.ajouteSection(temps, texte);
+
+        }
+
+        if (!modeEval.isSelected()) {
+            exercice.setMotIncomplet(motIncomplet.isSelected());
+            exercice.setSensibiliteCasse(casse.isSelected());
+            exercice.setAffichageSolution(solution.isSelected());
+        }
+
+        for (String texte : aideMots.getItems()) {
+            exercice.ajouteAide(texte);
+        }
+
+        System.out.println(exercice);
+
+        return exercice;
+    }
+
+    public void supprimer () {
 		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../ressources/fxml/alerteSuppressionRessource.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/ressources/fxml/alerteSuppressionRessource.fxml"));
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.initModality(Modality.APPLICATION_MODAL);
+
 		try {
 			stage.setScene(new Scene(loader.load()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+        ((Button) loader.getNamespace().get("confirmer")).setOnAction(event -> {
+            stage.close();
+            supprimerRessource();
+        });
+
+        ((Button) loader.getNamespace().get("annuler")).setOnAction(event -> {
+            stage.close();
+        });
+
 		stage.show();
 	}
 	
@@ -309,17 +440,8 @@ public class PrincipalController {
 		}
 		stage.show();
 	}
-	
-	@FXML
-	public void Display (ActionEvent event) {
-		String aide = TF1.getText();
-		aidecomp = aidecomp + "\n" + TF1.getText();
-		TA1.setText(aidecomp);
-		
-		
-	}
 
-	@FXML
+    @FXML
 	public void part() {
 		Platform.exit();
 	}
@@ -357,6 +479,10 @@ public class PrincipalController {
     	ressource.getMediaPlayer().stop();
         ressource.setMediaPlayer(null);
         supprimer.setDisable(true);
+
+        infosRessource.setVisible(false);
+
+        labelRessource.setVisible(true);
 
     }
 
@@ -481,6 +607,18 @@ public class PrincipalController {
 
         if (event.getCode() == KeyCode.DELETE)
             aideMots.getItems().remove(aideMots.getSelectionModel().getSelectedItem());
+
+    }
+
+    public void playPause(ActionEvent event) {
+
+        if (!ready)
+            return;
+        
+        if (ressource.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING)
+            ressource.getMediaPlayer().pause();
+        else
+            ressource.getMediaPlayer().play();
 
     }
 

@@ -8,18 +8,22 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
+<VBox stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
    <children>
       <MenuBar VBox.vgrow="ALWAYS">
       <menus>
@@ -97,24 +101,27 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
-                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" VBox.vgrow="ALWAYS">
+                        <TextArea fx:id="consigne" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
+                        <AnchorPane VBox.vgrow="ALWAYS">
                            <children>
-                              <Label fx:id="labelRessource" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#importer" onDragOver="#dragOver" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier audio ou video ici" wrapText="true" VBox.vgrow="ALWAYS">
+                              <MediaView fx:id="ressource" fitHeight="180.0" fitWidth="500.0" layoutX="19.0" layoutY="8.0" onMouseClicked="#importer" />
+                              <Label fx:id="labelRessource" alignment="CENTER" layoutX="38.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#importer" onDragOver="#dragOver" onMouseReleased="#importer" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier ou cliquez ici" wrapText="true">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                                  <padding>
                                     <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
                                  </padding>
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
                               </Label>
-                              <MediaView fx:id="ressource" onMouseClicked="#importer" VBox.vgrow="ALWAYS" />
-                              <Button fx:id="supprimer" disable="true" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" VBox.vgrow="ALWAYS" />
+                              <Button fx:id="supprimer" disable="true" layoutX="212.0" layoutY="198.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                              <VBox fx:id="infosRessource" alignment="TOP_CENTER" layoutX="435.0" layoutY="12.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0" visible="false">
+                                 <children>
+                                    <ToggleButton id="playPause" mnemonicParsing="false" onAction="#playPause" />
+                                    <Text fx:id="temps" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00 / 3:40" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
+                        </AnchorPane>
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" top="10.0" />
@@ -140,7 +147,11 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="400.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <CheckBox mnemonicParsing="false" text="Mode apprentissage" />
+                                          <RadioButton mnemonicParsing="false" selected="true" text="Mode apprentissage">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="mode" />
+                                             </toggleGroup>
+                                          </RadioButton>
                                           <CheckBox fx:id="limiteTemps" mnemonicParsing="false" onAction="#option" text="Limite de temps" />
                                        </children>
                                     </HBox>
@@ -148,14 +159,14 @@
                                        <children>
                                           <VBox spacing="10.0">
                                              <children>
-                                                <CheckBox mnemonicParsing="false" text="Autoriser l'affichage de la solution" />
-                                                <CheckBox mnemonicParsing="false" text="Mot incomplet (autoriser)" VBox.vgrow="ALWAYS" />
-                                                <CheckBox mnemonicParsing="false" text="sensibilité à la casse" />
+                                                <CheckBox fx:id="solution" mnemonicParsing="false" text="Autoriser l'affichage de la solution" />
+                                                <CheckBox fx:id="motIncomplet" mnemonicParsing="false" text="Mot incomplet (autoriser)" VBox.vgrow="ALWAYS" />
+                                                <CheckBox fx:id="casse" mnemonicParsing="false" text="sensibilité à la casse" />
                                              </children>
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <CheckBox mnemonicParsing="false" text="Mode évaluation" />
+                                    <RadioButton fx:id="modeEval" mnemonicParsing="false" text="Mode évaluation" toggleGroup="$mode" />
                                  </children>
                               </VBox>
                            </children>
