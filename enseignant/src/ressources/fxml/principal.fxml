@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
+   <children>
+      <MenuBar VBox.vgrow="ALWAYS">
+      <menus>
+        <Menu mnemonicParsing="false" text="Fichier">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Nouveau" />
+            <MenuItem mnemonicParsing="false" text="Ouvrir" />
+                  <MenuItem mnemonicParsing="false" onAction="#importerTexte" text="Importer un texte" />
+            <MenuItem disable="true" mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder " />
+                <MenuItem mnemonicParsing="false" onAction="#sauvegarder" text="Sauvegarder sous..." />
+            <MenuItem mnemonicParsing="false" onAction="#quitter" text="Quitter" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Aide">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#tutoriel" text="Manuel d'utilisateur" />
+          </items>
+        </Menu>
+      </menus>
+      </MenuBar>
+      <VBox prefHeight="613.0" prefWidth="141.0" VBox.vgrow="ALWAYS">
+         <children>
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Texte" />
+                        <TabPane fx:id="sections" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" VBox.vgrow="ALWAYS">
+                          <tabs>
+                            <Tab onCloseRequest="#fermer" text="section 1">
+                              <content>
+                                    <VBox>
+                                       <children>
+                                          <TextArea minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
+                                       </children>
+                                    </VBox>
+                              </content>
+                            </Tab>
+                            <Tab fx:id="ajoute" closable="false" onSelectionChanged="#ajouteSection" text="+" />
+                          </tabs>
+                        </TabPane>
+                        <VBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="84.0" prefWidth="478.0" spacing="70.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aide" />
+                                          <ListView fx:id="aideMots" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#retirerMot" prefHeight="159.0" prefWidth="259.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="30.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <TextField fx:id="motEntre" onKeyReleased="#ajouterMot" VBox.vgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" onAction="#ajouterMot" text="Ajouter" VBox.vgrow="ALWAYS">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Consigne" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <TextArea fx:id="consigne" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS" />
+                        <AnchorPane VBox.vgrow="ALWAYS">
+                           <children>
+                              <MediaView fx:id="ressource" fitHeight="180.0" fitWidth="500.0" layoutX="19.0" layoutY="8.0" onMouseClicked="#importer" />
+                              <Label fx:id="labelRessource" alignment="CENTER" layoutX="38.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDropped="#importer" onDragOver="#dragOver" onMouseReleased="#importer" styleClass="texte" stylesheets="@../css/style.css" text="Déposer un fichier ou cliquez ici" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
+                                 </padding>
+                              </Label>
+                              <Button fx:id="supprimer" disable="true" layoutX="212.0" layoutY="198.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                              <VBox fx:id="infosRessource" alignment="TOP_CENTER" layoutX="435.0" layoutY="12.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0" visible="false">
+                                 <children>
+                                    <ToggleButton id="playPause" mnemonicParsing="false" onAction="#playPause" selected="true" />
+                                    <Text fx:id="temps" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00 / 3:40" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="80.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Options : ">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <HBox>
+                           <children>
+                              <VBox alignment="BOTTOM_LEFT">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="400.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" selected="true" text="Mode apprentissage">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="mode" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <CheckBox fx:id="limiteTemps" mnemonicParsing="false" onAction="#option" text="Limite de temps" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <VBox spacing="10.0">
+                                             <children>
+                                                <CheckBox fx:id="solution" mnemonicParsing="false" text="Autoriser l'affichage de la solution" />
+                                                <CheckBox fx:id="motIncomplet" mnemonicParsing="false" text="Mot incomplet (autoriser)" VBox.vgrow="ALWAYS" />
+                                                <CheckBox fx:id="casse" mnemonicParsing="false" text="sensibilité à la casse" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <RadioButton fx:id="modeEval" mnemonicParsing="false" text="Mode évaluation" toggleGroup="$mode" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="zoneTemps" alignment="CENTER_LEFT" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label text="Section 1 :" />
+                              <Spinner />
+                           </children>
+                        </HBox>
+                        <Label text="Total : " />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>

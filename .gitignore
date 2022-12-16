@@ -1,1 +1,13 @@
-/.metadata/
+.metadata
+*/bin
+*.swp
+.idea
+.classpath
+production
+production/*
+artifacts
+META-INF
+*.jar
+*.o
+test
+PTS2 *.pdf
